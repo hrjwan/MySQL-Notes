@@ -1,0 +1,2927 @@
+import datetime
+import json
+import random
+import sys
+import time
+
+import pandas as pd
+import pymysql
+import pyqtgraph as pg
+import requests
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtCore import QTimer, QDateTime, QThread, pyqtSignal, Qt, QCoreApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QTableWidgetItem, QMessageBox, \
+    QDialog
+from pyqtgraph import GraphicsLayoutWidget
+
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(1154, 871)
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setContentsMargins(2, -1, -1, -1)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.jindu_3 = QtWidgets.QLineEdit(Form)
+        self.jindu_3.setObjectName("jindu_3")
+        self.horizontalLayout_5.addWidget(self.jindu_3)
+        spacerItem = QtWidgets.QSpacerItem(258, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_5)
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_6.addWidget(self.label_2)
+        spacerItem1 = QtWidgets.QSpacerItem(258, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem1)
+        self.horizontalLayout_6.setStretch(0, 2)
+        self.horizontalLayout_6.setStretch(1, 4)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_6)
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.jindu = QtWidgets.QLineEdit(Form)
+        self.jindu.setMaxLength(40)
+        self.jindu.setObjectName("jindu")
+        self.horizontalLayout_7.addWidget(self.jindu)
+        spacerItem2 = QtWidgets.QSpacerItem(258, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem2)
+        self.horizontalLayout_7.setStretch(0, 3)
+        self.horizontalLayout_7.setStretch(1, 1)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_7)
+        self.verticalLayout_6.addLayout(self.verticalLayout_5)
+        self.tabWidget = QtWidgets.QTabWidget(Form)
+        self.tabWidget.setMinimumSize(QtCore.QSize(100, 25))
+        self.tabWidget.setObjectName("tabWidget")
+        self.tab = QtWidgets.QWidget()
+        self.tab.setEnabled(True)
+        self.tab.setObjectName("tab")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.tab)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtWidgets.QLabel(self.tab)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+
+        self.dateTimeEdit = QtWidgets.QDateTimeEdit(QDateTime.currentDateTime())
+        self.dateTimeEdit.setCalendarPopup(True)
+        self.dateTimeEdit.setDisplayFormat("yyyy/MM/dd")  #
+
+        self.dateTimeEdit.setObjectName("dateTimeEdit")
+        self.verticalLayout.addWidget(self.dateTimeEdit)
+        self.horizontalLayout_2.addLayout(self.verticalLayout)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_3 = QtWidgets.QLabel(self.tab)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_2.addWidget(self.label_3)
+
+        self.dateTimeEdit_2= QtWidgets.QDateTimeEdit(QDateTime.currentDateTime())
+        self.dateTimeEdit_2.setCalendarPopup(True)
+        self.dateTimeEdit_2.setDisplayFormat("yyyy/MM/dd")
+        self.dateTimeEdit_2.setObjectName("dateTimeEdit_2")
+        self.verticalLayout_2.addWidget(self.dateTimeEdit_2)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem4)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.pushButton = QtWidgets.QPushButton(self.tab)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.pushButton_2 = QtWidgets.QPushButton(self.tab)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_3)
+        self.horizontalLayout_2.setStretch(0, 1)
+        self.horizontalLayout_2.setStretch(1, 1)
+        self.horizontalLayout_2.setStretch(2, 6)
+        self.horizontalLayout_2.setStretch(3, 2)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_2)
+        self.tableWidget = QtWidgets.QTableWidget(self.tab)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
+        self.verticalLayout_4.addWidget(self.tableWidget)
+        self.verticalLayout_4.setStretch(0, 1)
+        self.verticalLayout_4.setStretch(1, 20)
+        self.verticalLayout_7.addLayout(self.verticalLayout_4)
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.tab_2)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.verticalLayout_37 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_37.setObjectName("verticalLayout_37")
+        self.verticalLayout_36 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_36.setObjectName("verticalLayout_36")
+        self.label_17 = QtWidgets.QLabel(self.tab_2)
+        self.label_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_17.setObjectName("label_17")
+        self.verticalLayout_36.addWidget(self.label_17)
+        self.lineEdit_8 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit_8.setObjectName("lineEdit_8")
+        self.verticalLayout_36.addWidget(self.lineEdit_8)
+        self.verticalLayout_37.addLayout(self.verticalLayout_36)
+        self.verticalLayout_35 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_35.setObjectName("verticalLayout_35")
+        self.label_18 = QtWidgets.QLabel(self.tab_2)
+        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_18.setObjectName("label_18")
+        self.verticalLayout_35.addWidget(self.label_18)
+        self.lineEdit_9 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit_9.setObjectName("lineEdit_9")
+        self.verticalLayout_35.addWidget(self.lineEdit_9)
+        self.verticalLayout_37.addLayout(self.verticalLayout_35)
+        self.verticalLayout_34 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_34.setObjectName("verticalLayout_34")
+        self.label_19 = QtWidgets.QLabel(self.tab_2)
+        self.label_19.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_19.setObjectName("label_19")
+        self.verticalLayout_34.addWidget(self.label_19)
+        self.lineEdit_10 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit_10.setObjectName("lineEdit_10")
+        self.verticalLayout_34.addWidget(self.lineEdit_10)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_34.addItem(spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_34.addItem(spacerItem6)
+        self.verticalLayout_37.addLayout(self.verticalLayout_34)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_37)
+        self.line_4 = QtWidgets.QFrame(self.tab_2)
+        self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_4.setObjectName("line_4")
+        self.horizontalLayout_3.addWidget(self.line_4)
+        self.verticalLayout_38 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_38.setObjectName("verticalLayout_38")
+        self.label_21 = QtWidgets.QLabel(self.tab_2)
+        self.label_21.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_21.setObjectName("label_21")
+        self.verticalLayout_38.addWidget(self.label_21)
+        self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
+        self.tableWidget_2.setObjectName("tableWidget_2")
+        self.tableWidget_2.setColumnCount(0)
+        self.tableWidget_2.setRowCount(0)
+        self.verticalLayout_38.addWidget(self.tableWidget_2)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_38)
+        self.line_5 = QtWidgets.QFrame(self.tab_2)
+        self.line_5.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_5.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_5.setObjectName("line_5")
+        self.horizontalLayout_3.addWidget(self.line_5)
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.pushButton_3 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButton_3.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.verticalLayout_10.addWidget(self.pushButton_3)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_10.addItem(spacerItem7)
+        self.verticalLayout_12.addLayout(self.verticalLayout_10)
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.label_4 = QtWidgets.QLabel(self.tab_2)
+        self.label_4.setMinimumSize(QtCore.QSize(100, 25))
+        self.label_4.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.verticalLayout_11.addWidget(self.label_4)
+        self.comboBox = QtWidgets.QComboBox(self.tab_2)
+        self.comboBox.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox.setObjectName("comboBox")
+        self.verticalLayout_11.addWidget(self.comboBox)
+        self.verticalLayout_12.addLayout(self.verticalLayout_11)
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_9.addItem(spacerItem8)
+        self.pushButton_4 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButton_4.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_4.setText("")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.verticalLayout_9.addWidget(self.pushButton_4)
+        self.verticalLayout_12.addLayout(self.verticalLayout_9)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_12)
+        self.horizontalLayout_3.setStretch(0, 1)
+        self.horizontalLayout_3.setStretch(2, 15)
+        self.horizontalLayout_3.setStretch(4, 1)
+        self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
+        self.tabWidget.addTab(self.tab_2, "")
+        self.tab_4 = QtWidgets.QWidget()
+        self.tab_4.setObjectName("tab_4")
+        self.verticalLayout_42 = QtWidgets.QVBoxLayout(self.tab_4)
+        self.verticalLayout_42.setObjectName("verticalLayout_42")
+        self.line_9 = QtWidgets.QFrame(self.tab_4)
+        self.line_9.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_9.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_9.setObjectName("line_9")
+        self.verticalLayout_42.addWidget(self.line_9)
+        self.verticalLayout_41 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_41.setObjectName("verticalLayout_41")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.label_6 = QtWidgets.QLabel(self.tab_4)
+        self.label_6.setObjectName("label_6")
+        self.verticalLayout_18.addWidget(self.label_6)
+
+        self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(QDateTime.currentDateTime())
+        self.dateTimeEdit_3.setCalendarPopup(True)
+        self.dateTimeEdit_3.setDisplayFormat("yyyy/MM/dd")  #
+
+
+        self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
+        self.verticalLayout_18.addWidget(self.dateTimeEdit_3)
+        self.horizontalLayout_11.addLayout(self.verticalLayout_18)
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.label_7 = QtWidgets.QLabel(self.tab_4)
+        self.label_7.setObjectName("label_7")
+        self.verticalLayout_19.addWidget(self.label_7)
+
+        self.dateTimeEdit_4 = QtWidgets.QDateTimeEdit(QDateTime.currentDateTime())
+        self.dateTimeEdit_4.setCalendarPopup(True)
+        self.dateTimeEdit_4.setDisplayFormat("yyyy/MM/dd")  #
+        self.dateTimeEdit_4.setObjectName("dateTimeEdit_4")
+        self.verticalLayout_19.addWidget(self.dateTimeEdit_4)
+        self.horizontalLayout_11.addLayout(self.verticalLayout_19)
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.label_8 = QtWidgets.QLabel(self.tab_4)
+        self.label_8.setObjectName("label_8")
+        self.verticalLayout_17.addWidget(self.label_8)
+        self.lineEdit = QtWidgets.QLineEdit(self.tab_4)
+        self.lineEdit.setObjectName("lineEdit")
+        self.verticalLayout_17.addWidget(self.lineEdit)
+        self.verticalLayout_17.setStretch(0, 1)
+        self.horizontalLayout_10.addLayout(self.verticalLayout_17)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem9)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem10)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem11)
+        self.horizontalLayout_10.setStretch(0, 1)
+        self.horizontalLayout_10.setStretch(1, 1)
+        self.horizontalLayout_10.setStretch(2, 1)
+        self.horizontalLayout_10.setStretch(3, 1)
+        self.horizontalLayout_11.addLayout(self.horizontalLayout_10)
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_20.addItem(spacerItem12)
+        self.pushButton_7 = QtWidgets.QPushButton(self.tab_4)
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.verticalLayout_20.addWidget(self.pushButton_7)
+        self.horizontalLayout_11.addLayout(self.verticalLayout_20)
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.label_9 = QtWidgets.QLabel(self.tab_4)
+        self.label_9.setMinimumSize(QtCore.QSize(100, 25))
+        self.label_9.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_9.setObjectName("label_9")
+        self.verticalLayout_21.addWidget(self.label_9)
+        self.comboBox_3 = QtWidgets.QComboBox(self.tab_4)
+        self.comboBox_3.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox_3.setObjectName("comboBox_3")
+        self.verticalLayout_21.addWidget(self.comboBox_3)
+        self.horizontalLayout_11.addLayout(self.verticalLayout_21)
+        self.verticalLayout_22 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_22.setObjectName("verticalLayout_22")
+        spacerItem13 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_22.addItem(spacerItem13)
+        self.pushButton_8 = QtWidgets.QPushButton(self.tab_4)
+        self.pushButton_8.setObjectName("pushButton_8")
+        self.verticalLayout_22.addWidget(self.pushButton_8)
+        self.horizontalLayout_11.addLayout(self.verticalLayout_22)
+        self.horizontalLayout_11.setStretch(0, 1)
+        self.horizontalLayout_11.setStretch(1, 1)
+        self.horizontalLayout_11.setStretch(2, 1)
+        self.horizontalLayout_11.setStretch(3, 1)
+        self.horizontalLayout_11.setStretch(4, 1)
+        self.horizontalLayout_11.setStretch(5, 1)
+        self.verticalLayout_41.addLayout(self.horizontalLayout_11)
+        self.line_6 = QtWidgets.QFrame(self.tab_4)
+        self.line_6.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_6.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_6.setObjectName("line_6")
+        self.verticalLayout_41.addWidget(self.line_6)
+        self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
+        self.tableWidget_4.setObjectName("tableWidget_4")
+        self.tableWidget_4.setColumnCount(0)
+        self.tableWidget_4.setRowCount(0)
+        self.verticalLayout_41.addWidget(self.tableWidget_4)
+        self.line_7 = QtWidgets.QFrame(self.tab_4)
+        self.line_7.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_7.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_7.setObjectName("line_7")
+        self.verticalLayout_41.addWidget(self.line_7)
+        self.verticalLayout_39 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_39.setObjectName("verticalLayout_39")
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem14)
+        self.label_20 = QtWidgets.QLabel(self.tab_4)
+        self.label_20.setObjectName("label_20")
+        self.horizontalLayout_12.addWidget(self.label_20)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem15)
+        self.horizontalLayout_12.setStretch(0, 1)
+        self.horizontalLayout_12.setStretch(2, 1)
+        self.verticalLayout_39.addLayout(self.horizontalLayout_12)
+        self.pyqtgraph1 = GraphicsLayoutWidget(self.tab_4)
+        self.pyqtgraph1.setObjectName("pyqtgraph1")
+        self.verticalLayout_39.addWidget(self.pyqtgraph1)
+        self.verticalLayout_39.setStretch(0, 1)
+        self.verticalLayout_39.setStretch(1, 15)
+        self.verticalLayout_41.addLayout(self.verticalLayout_39)
+        self.line_8 = QtWidgets.QFrame(self.tab_4)
+        self.line_8.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_8.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_8.setObjectName("line_8")
+        self.verticalLayout_41.addWidget(self.line_8)
+        self.verticalLayout_40 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_40.setObjectName("verticalLayout_40")
+        self.horizontalLayout_13 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_13.addItem(spacerItem16)
+        self.label_22 = QtWidgets.QLabel(self.tab_4)
+        self.label_22.setObjectName("label_22")
+        self.horizontalLayout_13.addWidget(self.label_22)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_13.addItem(spacerItem17)
+        self.horizontalLayout_13.setStretch(0, 1)
+        self.horizontalLayout_13.setStretch(2, 1)
+        self.verticalLayout_40.addLayout(self.horizontalLayout_13)
+        self.pyqtgraph1_2 = GraphicsLayoutWidget(self.tab_4)
+        self.pyqtgraph1_2.setObjectName("pyqtgraph1_2")
+        self.verticalLayout_40.addWidget(self.pyqtgraph1_2)
+        self.verticalLayout_40.setStretch(0, 1)
+        self.verticalLayout_40.setStretch(1, 15)
+        self.verticalLayout_41.addLayout(self.verticalLayout_40)
+        self.verticalLayout_41.setStretch(0, 1)
+        self.verticalLayout_41.setStretch(2, 10)
+        self.verticalLayout_41.setStretch(4, 10)
+        self.verticalLayout_41.setStretch(6, 10)
+        self.verticalLayout_42.addLayout(self.verticalLayout_41)
+        self.line_10 = QtWidgets.QFrame(self.tab_4)
+        self.line_10.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_10.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_10.setObjectName("line_10")
+        self.verticalLayout_42.addWidget(self.line_10)
+        self.tabWidget.addTab(self.tab_4, "")
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName("tab_3")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.tab_3)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.verticalLayout_33 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_33.setObjectName("verticalLayout_33")
+        self.verticalLayout_29 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_29.setObjectName("verticalLayout_29")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.label_10 = QtWidgets.QLabel(self.tab_3)
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.verticalLayout_14.addWidget(self.label_10)
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.verticalLayout_14.addWidget(self.lineEdit_2)
+        self.verticalLayout_29.addLayout(self.verticalLayout_14)
+        self.pushButton_5 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.verticalLayout_29.addWidget(self.pushButton_5)
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        self.label_14 = QtWidgets.QLabel(self.tab_3)
+        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_14.setObjectName("label_14")
+        self.verticalLayout_24.addWidget(self.label_14)
+        self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.verticalLayout_24.addWidget(self.lineEdit_3)
+        spacerItem18 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_24.addItem(spacerItem18)
+        self.verticalLayout_29.addLayout(self.verticalLayout_24)
+        self.verticalLayout_33.addLayout(self.verticalLayout_29)
+        self.verticalLayout_31 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_31.setObjectName("verticalLayout_31")
+        self.verticalLayout_26 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_26.setObjectName("verticalLayout_26")
+        self.line_3 = QtWidgets.QFrame(self.tab_3)
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.verticalLayout_26.addWidget(self.line_3)
+        self.label_15 = QtWidgets.QLabel(self.tab_3)
+        self.label_15.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_15.setObjectName("label_15")
+        self.verticalLayout_26.addWidget(self.label_15)
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_5.setText("")
+        self.lineEdit_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_5.setObjectName("lineEdit_5")
+        self.verticalLayout_26.addWidget(self.lineEdit_5)
+        self.verticalLayout_31.addLayout(self.verticalLayout_26)
+        self.verticalLayout_25 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_25.setObjectName("verticalLayout_25")
+        self.label_12 = QtWidgets.QLabel(self.tab_3)
+        self.label_12.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_12.setObjectName("label_12")
+        self.verticalLayout_25.addWidget(self.label_12)
+        self.lineEdit_4 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.verticalLayout_25.addWidget(self.lineEdit_4)
+        self.verticalLayout_31.addLayout(self.verticalLayout_25)
+        self.verticalLayout_27 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_27.setObjectName("verticalLayout_27")
+        self.label_11 = QtWidgets.QLabel(self.tab_3)
+        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setObjectName("label_11")
+        self.verticalLayout_27.addWidget(self.label_11)
+        self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_6.setObjectName("lineEdit_6")
+        self.verticalLayout_27.addWidget(self.lineEdit_6)
+        self.verticalLayout_31.addLayout(self.verticalLayout_27)
+        self.verticalLayout_30 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_30.setObjectName("verticalLayout_30")
+        self.label_16 = QtWidgets.QLabel(self.tab_3)
+        self.label_16.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_16.setObjectName("label_16")
+        self.verticalLayout_30.addWidget(self.label_16)
+        self.lineEdit_7 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_7.setObjectName("lineEdit_7")
+        self.verticalLayout_30.addWidget(self.lineEdit_7)
+        self.verticalLayout_31.addLayout(self.verticalLayout_30)
+        self.verticalLayout_33.addLayout(self.verticalLayout_31)
+        self.verticalLayout_33.setStretch(0, 1)
+        self.verticalLayout_33.setStretch(1, 1)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_33)
+        self.line_2 = QtWidgets.QFrame(self.tab_3)
+        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.horizontalLayout_8.addWidget(self.line_2)
+        self.verticalLayout_28 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_28.setObjectName("verticalLayout_28")
+        self.label_13 = QtWidgets.QLabel(self.tab_3)
+        self.label_13.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_13.setObjectName("label_13")
+        self.verticalLayout_28.addWidget(self.label_13)
+        self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_3)
+        self.tableWidget_3.setObjectName("tableWidget_3")
+        self.tableWidget_3.setColumnCount(0)
+        self.tableWidget_3.setRowCount(0)
+        self.verticalLayout_28.addWidget(self.tableWidget_3)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_28)
+        self.line = QtWidgets.QFrame(self.tab_3)
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.horizontalLayout_8.addWidget(self.line)
+        self.verticalLayout_32 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_32.setObjectName("verticalLayout_32")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.pushButton_10 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_10.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.verticalLayout_13.addWidget(self.pushButton_10)
+        self.verticalLayout_32.addLayout(self.verticalLayout_13)
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        spacerItem19 = QtWidgets.QSpacerItem(97, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_15.addItem(spacerItem19)
+        self.label_5 = QtWidgets.QLabel(self.tab_3)
+        self.label_5.setMinimumSize(QtCore.QSize(100, 25))
+        self.label_5.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_15.addWidget(self.label_5)
+        self.comboBox_2 = QtWidgets.QComboBox(self.tab_3)
+        self.comboBox_2.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox_2.setObjectName("comboBox_2")
+        self.verticalLayout_15.addWidget(self.comboBox_2)
+        self.verticalLayout_32.addLayout(self.verticalLayout_15)
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        spacerItem20 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_16.addItem(spacerItem20)
+        self.pushButton_6 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_6.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.verticalLayout_16.addWidget(self.pushButton_6)
+        self.verticalLayout_32.addLayout(self.verticalLayout_16)
+        self.verticalLayout_23 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_23.setObjectName("verticalLayout_23")
+        spacerItem21 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_23.addItem(spacerItem21)
+        self.pushButton_9 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_9.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_9.setObjectName("pushButton_9")
+        self.verticalLayout_23.addWidget(self.pushButton_9)
+        self.verticalLayout_32.addLayout(self.verticalLayout_23)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_32)
+        self.horizontalLayout_8.setStretch(0, 1)
+        self.horizontalLayout_8.setStretch(2, 10)
+        self.horizontalLayout_8.setStretch(4, 1)
+        self.horizontalLayout_9.addLayout(self.horizontalLayout_8)
+        self.tabWidget.addTab(self.tab_3, "")
+        self.verticalLayout_6.addWidget(self.tabWidget)
+        self.verticalLayout_8.addLayout(self.verticalLayout_6)
+
+        self.retranslateUi(Form)
+        self.tabWidget.setCurrentIndex(2)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form1"))
+        self.label_2.setText(_translate("Form", "提示框"))
+        self.label.setText(_translate("Form", "起始时间"))
+        self.label_3.setText(_translate("Form", "截至时间"))
+        self.pushButton.setText(_translate("Form", "数据获取"))
+        self.pushButton_2.setText(_translate("Form", "导出数据"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "店铺竞价信息总览"))
+        self.label_17.setText(_translate("Form", "日曝光总目标"))
+        self.label_18.setText(_translate("Form", "现阶段计划曝光"))
+        self.label_19.setText(_translate("Form", "现阶段实际曝光"))
+        self.label_21.setText(_translate("Form", "竞价实时状态"))
+        self.pushButton_3.setText(_translate("Form", "获取门店列表"))
+        self.label_4.setText(_translate("Form", "选择店铺"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "店铺实时竞价状态"))
+        self.label_6.setText(_translate("Form", "起始时间"))
+        self.label_7.setText(_translate("Form", "截至时间"))
+        self.label_8.setText(_translate("Form", "周期（天）"))
+        self.pushButton_7.setText(_translate("Form", "数据获取"))
+        self.label_9.setText(_translate("Form", "选择店铺"))
+        self.pushButton_8.setText(_translate("Form", "导出数据"))
+        self.label_20.setText(_translate("Form", "流量效率分析曲线"))
+        self.label_22.setText(_translate("Form", "流量成本分析曲线"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Form", "店铺竞价分析"))
+        self.label_10.setText(_translate("Form", "竞价曝光占比（%）"))
+        self.pushButton_5.setText(_translate("Form", "转化"))
+        self.label_14.setText(_translate("Form", "日竞价曝光目标（次）"))
+        self.label_15.setText(_translate("Form", "调价间隔（分）"))
+        self.label_12.setText(_translate("Form", "出价最大值"))
+        self.label_11.setText(_translate("Form", "出价最小值（元）"))
+        self.label_16.setText(_translate("Form", "调价幅度（元）"))
+        self.label_13.setText(_translate("Form", "分时系数（%）"))
+        self.pushButton_10.setText(_translate("Form", "查看设置"))
+        self.label_5.setText(_translate("Form", "选择店铺"))
+        self.pushButton_6.setText(_translate("Form", "修改设置"))
+        self.pushButton_9.setText(_translate("Form", "确认修改"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "店铺竞价设置"))
+class MainWindow1(QWidget, Ui_Form):
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle('点金工具demo1.0')
+        starbl = self.starbl()
+
+
+    def starbl(self):
+
+        #竞价设置页面
+        self.pushButton_10.clicked.connect(self.setstatuslist)
+        self.comboBox_2.currentIndexChanged.connect(self.setstatus)
+        self.pushButton_6.clicked.connect(self.seting)
+        self.pushButton_9.clicked.connect(self.setfinish)
+        self.pushButton_5.clicked.connect(self.zhanbizhuanghua)
+
+
+        # 竞价状态查看页面
+        self.pushButton_3.clicked.connect(self.checkstatuslist)
+        self.comboBox.currentIndexChanged.connect(self.checkstatus)
+
+        # 竞价分析页面
+        self.pushButton_7.clicked.connect(self.yanalysislist)
+        self.pushButton_8.clicked.connect(self.yanalysisoutput)
+        self.comboBox_3.currentIndexChanged.connect(self.yanalysis)
+        self.dateTimeEdit_3.dateChanged.connect(self.onDateChanged3)
+        self.dateTimeEdit_4.dateChanged.connect(self.onDateChanged4)
+
+
+        # 竞价总览页面
+        self.pushButton.clicked.connect(self.zlreport)
+        self.pushButton_2.clicked.connect(self.zloutputexcle)
+        self.dateTimeEdit.dateChanged.connect(self.onDateChanged1)
+        self.dateTimeEdit_2.dateChanged.connect(self.onDateChanged2)
+
+
+
+
+        # draw1 = self.draw1()
+        # draw1 = self.draw2()
+
+
+        try:
+
+            # self.huodongchakan_button_2.clicked.connect(self.dayreport)
+            #
+            # self.comboBox.currentIndexChanged.connect(self.dayreport1)
+
+
+            global today, offset, re_date, db, wz, type,shopnamelist,setnamelist,checknamelist
+
+            global zlDatestart, zlDateend, zdyDatestart, zdyDateend,dwDateend
+            shopnamelist = []
+            setnamelist  = []
+            checknamelist = []
+
+
+
+            today = datetime.datetime.now()
+            offset = datetime.timedelta(days=-1)
+
+            dwDateend=datetime.datetime.strptime((today+offset).strftime('%Y-%m-%d'), "%Y-%m-%d")
+
+
+            zlDatestart=datetime.datetime.strptime(today.strftime('%Y-%m-%d'), "%Y-%m-%d")
+
+
+            zlDateend=datetime.datetime.strptime(today.strftime('%Y-%m-%d'), "%Y-%m-%d")
+
+
+            zdyDatestart = datetime.datetime.strptime(today.strftime('%Y-%m-%d'), "%Y-%m-%d")
+
+            zdyDateend=datetime.datetime.strptime(today.strftime('%Y-%m-%d'), "%Y-%m-%d")
+
+            db = pymysql.connect(host="121.4.74.156", user="yylptx", passwd="hrjwan688", port=3306, db="yylptx")
+
+            # db = pymysql.connect(host="121.4.74.156", user="ddtest", passwd="688688", port=3306, db="ddtest")
+            wz = db.cursor()
+            type = 1
+            timer = QTimer(self)
+            timer.timeout.connect(self.showtime)
+            timer.start()
+            self.jindu.setText("初始化成功")
+            self.jindu.setStyleSheet("color:blue")
+            self.jindu.setStyleSheet("background-color:gold")
+
+
+        except Exception as e:
+
+            print(e)
+
+            # i = str(e)
+            #
+            # self.signal.emit(str(i))
+            self.jindu.setText("初始化失败"+str(e))
+            self.jindu.setStyleSheet("color:blue")
+            self.jindu.setStyleSheet("background-color:red")
+    def showtime(self):
+        datetime = QDateTime.currentDateTime()
+        text = datetime.toString("yyyy-MM-dd hh:mm:ss ddd")
+        self.jindu_3.setStyleSheet("color:blue") #字体色
+        # self.jindu_2.setStyleSheet("background-color:red") 背景色
+        self.jindu_3.setText('圆芋良品报表工具demo1  '+text)
+        self.jindu_3.setEnabled(False)
+    def callback(self, i):  # 这里的 i 就是任务线程传回的数据
+
+        # self.jindu.setStyleSheet("color:green")
+
+        if '查询成功' in i:
+
+            self.jindu.setStyleSheet("background-color:green")
+        elif'查询完成'in i:
+            self.jindu.setStyleSheet("color:blue")
+            self.jindu.setStyleSheet("background-color:gold")
+
+
+        elif '查询失败' in i:
+            self.jindu.setStyleSheet("background-color:red")
+
+        QApplication.processEvents()
+        self.jindu.setText(i)
+
+    def setstatuslist(self):
+
+        self.sets_thread1 = Setstatuslist()  # 实例化自己建立的任务线程类
+        self.sets_thread1.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+
+        self.sets_thread1.comboBox_2 = self.comboBox_2
+        self.sets_thread1.start()  # 启动任务线程
+    def setstatus(self,x):
+
+        self.pushButton_5.setEnabled(False)
+        self.sets_thread2 = Setstatus()  # 实例化自己建立的任务线程类
+        self.sets_thread2.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.sets_thread2.tableWidget_3 = self.tableWidget_3
+        self.sets_thread2.lineEdit_2 = self.lineEdit_2
+        self.sets_thread2.lineEdit_3 = self.lineEdit_3
+        self.sets_thread2.lineEdit_4 = self.lineEdit_4
+        self.sets_thread2.lineEdit_5 = self.lineEdit_5
+        self.sets_thread2.lineEdit_6 = self.lineEdit_6
+        self.sets_thread2.lineEdit_7 = self.lineEdit_7
+
+        self.sets_thread2.x = x
+        self.sets_thread2.start()  # 启动任务线程
+    def seting(self):
+        self.pushButton_5.setEnabled(True)
+
+        self.seti_thread2 = Seting()  # 实例化自己建立的任务线程类
+        self.seti_thread2.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+
+        self.seti_thread2.tableWidget_3 = self.tableWidget_3
+        self.seti_thread2.lineEdit_2 = self.lineEdit_2
+        self.seti_thread2.lineEdit_3 = self.lineEdit_3
+        self.seti_thread2.lineEdit_4 = self.lineEdit_4
+        self.seti_thread2.lineEdit_5 = self.lineEdit_5
+        self.seti_thread2.lineEdit_6 = self.lineEdit_6
+        self.seti_thread2.lineEdit_7 = self.lineEdit_7
+        self.seti_thread2.start()  # 启动任务线程
+    def setfinish(self):
+
+        self.setf_thread2 = Setfinish()  # 实例化自己建立的任务线程类
+
+        self.setf_thread2.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+
+        self.setf_thread2.tableWidget_3 = self.tableWidget_3
+        self.setf_thread2.lineEdit_2 = self.lineEdit_2
+        self.setf_thread2.lineEdit_3 = self.lineEdit_3
+        self.setf_thread2.lineEdit_4 = self.lineEdit_4
+        self.setf_thread2.lineEdit_5 = self.lineEdit_5
+        self.setf_thread2.lineEdit_6 = self.lineEdit_6
+        self.setf_thread2.lineEdit_7 = self.lineEdit_7
+        self.setf_thread2.start()  # 启动任务线程
+    def zhanbizhuanghua(self):
+        self.sets_thread4 = Zhanbizhuanghua()  # 实例化自己建立的任务线程类
+        self.sets_thread4.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.sets_thread4.lineEdit_2 = self.lineEdit_2
+        self.sets_thread4.lineEdit_3 = self.lineEdit_3
+
+        self.sets_thread4.start()  # 启动任务线程
+
+
+    def checkstatuslist(self):
+        self.cht_thread1 = Checkstatuslist()  # 实例化自己建立的任务线程类
+        self.cht_thread1.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.cht_thread1.comboBox = self.comboBox
+        self.cht_thread1.start()  # 启动任务线程++
+    def checkstatus(self,x):
+
+        self.chs_thread2 = Checkstatus()  # 实例化自己建立的任务线程类
+        self.chs_thread2.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.chs_thread2.tableWidget_2 = self.tableWidget_2
+        self.chs_thread2.lineEdit_8 = self.lineEdit_8
+        self.chs_thread2.lineEdit_9 = self.lineEdit_9
+        self.chs_thread2.lineEdit_10 = self.lineEdit_10
+        self.chs_thread2.x = x
+        self.chs_thread2.start()  # 启动任务线程
+
+    def yanalysislist(self):
+        self.yan_thread1 = Yanalysislist()  # 实例化自己建立的任务线程类
+        self.yan_thread1.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.yan_thread1.comboBox_3 = self.comboBox_3
+        self.yan_thread1.start()  # 启动任务线程++
+    def yanalysis(self,x):
+        self.yan_thread2 = Yanalysis()  # 实例化自己建立的任务线程类
+        self.yan_thread2.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.yan_thread2.tableWidget_4 = self.tableWidget_4
+        self.yan_thread2.pyqtgraph1=self.pyqtgraph1
+        self.yan_thread2.pyqtgraph1_2 = self.pyqtgraph1_2
+
+        self.yan_thread2.x = x
+        self.yan_thread2.start()  # 启动任务线程
+    def yanalysisoutput(self):
+        self.yan_thread3 = Yanalysisoutput()  # 实例化自己建立的任务线程类
+        self.yan_thread3.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.yan_thread3.tableWidget_4 = self.tableWidget_4
+        self.yan_thread3.start()  # 启动任务线程
+
+
+    def zlreport(self):
+
+
+        self.zlr_thread1 = Zlreport()  # 实例化自己建立的任务线程类
+        self.zlr_thread1.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.zlr_thread1.tableWidget = self.tableWidget  # 这句就是给线程的实例化一个属性给其赋值，在线程里面就可以调用了
+        self.zlr_thread1.start()  # 启动任务线程
+    def zloutputexcle(self):
+
+        self.zlout_thread1 = Zloutputexcle()  # 实例化自己建立的任务线程类
+        self.zlout_thread1.signal.connect(self.callback)  # 设置任务线程发射信号触发的函数
+        self.zlout_thread1.tableWidget = self.tableWidget  # 这句就是给线程的实例化一个属性给其赋值，在线程里面就可以调用了
+
+        self.zlout_thread1.start()  # 启动任务线程
+
+
+
+
+    def onDateChanged1(self,date):
+        global zlDatestart
+
+        print('定义开始时间')
+
+
+        zlDatestart=datetime.datetime.strptime(date.toString("yyyy-MM-dd"), "%Y-%m-%d")
+
+        print(zlDatestart)
+
+    def onDateChanged2(self, date):
+        global zlDateend
+        print('定义结束时间')
+
+        zlDateend = datetime.datetime.strptime(date.toString("yyyy-MM-dd"), "%Y-%m-%d")
+
+        print(zlDateend)
+
+    def onDateChanged3(self, date):
+
+        global zdyDatestart
+        print('定义开始时间')
+        zdyDatestart = datetime.datetime.strptime(date.toString("yyyy-MM-dd"), "%Y-%m-%d")
+        print(zdyDatestart)
+
+    def onDateChanged4(self, date):
+        global zdyDateend
+        zdyDateend = datetime.datetime.strptime(date.toString("yyyy-MM-dd"), "%Y-%m-%d")
+        print('定义结束时间')
+        print(zdyDateend)
+
+        zdydatakuadu = int(( zdyDateend- zdyDatestart).days) + 1
+
+        # jiangeDate =zdyDateend-zdyDatestart
+        self.lineEdit.setText(str(zdydatakuadu))
+        self.lineEdit.setEnabled(False)
+class loginui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(524, 424)
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.tabWidget = QtWidgets.QTabWidget(Form)
+        self.tabWidget.setMovable(False)
+        self.tabWidget.setObjectName("tabWidget")
+        self.tab_1 = QtWidgets.QWidget()
+        self.tab_1.setObjectName("tab_1")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.tab_1)
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.label = QtWidgets.QLabel(self.tab_1)
+        self.label.setTextFormat(QtCore.Qt.AutoText)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
+        self.label.setObjectName("label")
+        self.horizontalLayout_4.addWidget(self.label)
+        self.line = QtWidgets.QFrame(self.tab_1)
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.horizontalLayout_4.addWidget(self.line)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label_2 = QtWidgets.QLabel(self.tab_1)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.lineEdit = QtWidgets.QLineEdit(self.tab_1)
+        self.lineEdit.setMinimumSize(QtCore.QSize(120, 20))
+        self.lineEdit.setMaximumSize(QtCore.QSize(120, 20))
+        self.lineEdit.setObjectName("lineEdit")
+        self.horizontalLayout_2.addWidget(self.lineEdit)
+        spacerItem1 = QtWidgets.QSpacerItem(70, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.horizontalLayout_2.setStretch(0, 8)
+        self.horizontalLayout_2.setStretch(1, 4)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_3.addLayout(self.verticalLayout)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_3 = QtWidgets.QLabel(self.tab_1)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_2.addWidget(self.label_3)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_1)
+        self.lineEdit_2.setMinimumSize(QtCore.QSize(120, 20))
+        self.lineEdit_2.setMaximumSize(QtCore.QSize(120, 20))
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.horizontalLayout.addWidget(self.lineEdit_2)
+        self.checkBox = QtWidgets.QCheckBox(self.tab_1)
+        self.checkBox.setMinimumSize(QtCore.QSize(70, 20))
+        self.checkBox.setMaximumSize(QtCore.QSize(700, 20))
+        self.checkBox.setIconSize(QtCore.QSize(20, 20))
+        self.checkBox.setObjectName("checkBox")
+        self.horizontalLayout.addWidget(self.checkBox)
+        self.horizontalLayout.setStretch(0, 8)
+        self.horizontalLayout.setStretch(1, 4)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        self.verticalLayout_4.addLayout(self.verticalLayout_3)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem2)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.pushButton_2 = QtWidgets.QPushButton(self.tab_1)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout_3.addWidget(self.pushButton_2)
+        self.pushButton_3 = QtWidgets.QPushButton(self.tab_1)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.horizontalLayout_3.addWidget(self.pushButton_3)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_3)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem3)
+        self.verticalLayout_4.setStretch(0, 4)
+        self.verticalLayout_4.setStretch(1, 4)
+        self.verticalLayout_4.setStretch(2, 2)
+        self.verticalLayout_4.setStretch(3, 4)
+        self.verticalLayout_4.setStretch(4, 4)
+        self.horizontalLayout_4.addLayout(self.verticalLayout_4)
+        self.horizontalLayout_4.setStretch(0, 8)
+        self.horizontalLayout_4.setStretch(2, 8)
+        self.horizontalLayout_7.addLayout(self.horizontalLayout_4)
+        self.tabWidget.addTab(self.tab_1, "")
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab_2)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.label_4 = QtWidgets.QLabel(self.tab_2)
+        self.label_4.setTextFormat(QtCore.Qt.AutoText)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
+        self.label_4.setObjectName("label_4")
+        self.verticalLayout_5.addWidget(self.label_4)
+        self.line_2 = QtWidgets.QFrame(self.tab_2)
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.verticalLayout_5.addWidget(self.line_2)
+        spacerItem4 = QtWidgets.QSpacerItem(471, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout_5.addItem(spacerItem4)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 13, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem5)
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.label_8 = QtWidgets.QLabel(self.tab_2)
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout_9.addWidget(self.label_8)
+        self.zc_username_3 = QtWidgets.QLineEdit(self.tab_2)
+        self.zc_username_3.setMinimumSize(QtCore.QSize(120, 20))
+        self.zc_username_3.setMaximumSize(QtCore.QSize(120, 20))
+        self.zc_username_3.setObjectName("zc_username_3")
+        self.horizontalLayout_9.addWidget(self.zc_username_3)
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.horizontalLayout_9.addLayout(self.verticalLayout_12)
+        self.label_5 = QtWidgets.QLabel(self.tab_2)
+        self.label_5.setText("")
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_9.addWidget(self.label_5)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_9.addItem(spacerItem6)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_9)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem7)
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.label_10 = QtWidgets.QLabel(self.tab_2)
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.horizontalLayout_11.addWidget(self.label_10)
+        self.zc_username_5 = QtWidgets.QLineEdit(self.tab_2)
+        self.zc_username_5.setMinimumSize(QtCore.QSize(120, 20))
+        self.zc_username_5.setMaximumSize(QtCore.QSize(120, 20))
+        self.zc_username_5.setObjectName("zc_username_5")
+        self.horizontalLayout_11.addWidget(self.zc_username_5)
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.horizontalLayout_11.addLayout(self.verticalLayout_14)
+        self.label_6 = QtWidgets.QLabel(self.tab_2)
+        self.label_6.setText("")
+        self.label_6.setObjectName("label_6")
+        self.horizontalLayout_11.addWidget(self.label_6)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem8)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_11)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem9)
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.label_9 = QtWidgets.QLabel(self.tab_2)
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.horizontalLayout_10.addWidget(self.label_9)
+        self.zc_username_4 = QtWidgets.QLineEdit(self.tab_2)
+        self.zc_username_4.setMinimumSize(QtCore.QSize(120, 20))
+        self.zc_username_4.setMaximumSize(QtCore.QSize(120, 20))
+        self.zc_username_4.setObjectName("zc_username_4")
+        self.horizontalLayout_10.addWidget(self.zc_username_4)
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.horizontalLayout_10.addLayout(self.verticalLayout_13)
+        self.label_7 = QtWidgets.QLabel(self.tab_2)
+        self.label_7.setText("")
+        self.label_7.setObjectName("label_7")
+        self.horizontalLayout_10.addWidget(self.label_7)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem10)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_10)
+        spacerItem11 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem11)
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.label_11 = QtWidgets.QLabel(self.tab_2)
+        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setObjectName("label_11")
+        self.horizontalLayout_12.addWidget(self.label_11)
+        self.zc_username_6 = QtWidgets.QLineEdit(self.tab_2)
+        self.zc_username_6.setMinimumSize(QtCore.QSize(120, 20))
+        self.zc_username_6.setMaximumSize(QtCore.QSize(120, 20))
+        self.zc_username_6.setObjectName("zc_username_6")
+        self.horizontalLayout_12.addWidget(self.zc_username_6)
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.horizontalLayout_12.addLayout(self.verticalLayout_15)
+        self.label_12 = QtWidgets.QLabel(self.tab_2)
+        self.label_12.setText("")
+        self.label_12.setObjectName("label_12")
+        self.horizontalLayout_12.addWidget(self.label_12)
+        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem12)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_12)
+        spacerItem13 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem13)
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.line_3 = QtWidgets.QFrame(self.tab_2)
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.verticalLayout_9.addWidget(self.line_3)
+        self.pushButton_zc = QtWidgets.QPushButton(self.tab_2)
+        self.pushButton_zc.setObjectName("pushButton_zc")
+        self.verticalLayout_9.addWidget(self.pushButton_zc)
+        self.verticalLayout_5.addLayout(self.verticalLayout_9)
+        self.tabWidget.addTab(self.tab_2, "")
+        self.verticalLayout_11.addWidget(self.tabWidget)
+
+        self.retranslateUi(Form)
+        self.tabWidget.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.label.setText(_translate("Form",
+                                      "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#00aa00;\">圆芋良品</span></p><p><span style=\" font-size:14pt; font-weight:600; color:#00aa00;\">点金工具</span></p></body></html>"))
+        self.label_2.setText(_translate("Form", "用户名"))
+        self.label_3.setText(_translate("Form", "密码"))
+        self.checkBox.setText(_translate("Form", "显示密码"))
+        self.pushButton_2.setText(_translate("Form", "登陆"))
+        self.pushButton_3.setText(_translate("Form", "退出"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Form", "登录窗口"))
+        self.label_4.setText(
+            _translate("Form", "<html><head/><body><p><span style=\" font-size:36pt;\">注册页面</span></p></body></html>"))
+        self.label_8.setText(_translate("Form", "姓    名"))
+        self.label_10.setText(_translate("Form", "账    号"))
+        self.label_9.setText(_translate("Form", "密    码"))
+        self.label_11.setText(_translate("Form", "确认密码"))
+        self.pushButton_zc.setText(_translate("Form", "注册"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "注册窗口"))
+
+class logindialog1(QDialog, loginui_Form):
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle('点金工具登陆页面')
+        self.checkBox.stateChanged.connect(self.checkLanguage)
+
+        self.pushButton_2.clicked.connect(self.login)
+
+        self.pushButton_3.clicked.connect(QCoreApplication.instance().quit)
+        self.pushButton_zc.clicked.connect(self.signup)
+
+
+
+
+
+
+    def checkLanguage(self, state):
+        checkBox = self.sender()
+        if state == QtCore.Qt.Unchecked:
+            self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+
+        elif state == QtCore.Qt.Checked:
+            self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Normal)
+
+
+    def login(self):
+        """登录功能"""
+        username = self.lineEdit.text()  # 获取账号
+        password = self.lineEdit_2.text()  # 获取密码
+        db = pymysql.connect(host="121.4.74.156", user="yylptx", passwd="hrjwan688", port=3306, db="yylptx")
+
+        # db = pymysql.connect(host="121.4.74.156", user="ddtest", passwd="688688", port=3306, db="ddtest")
+        wz = db.cursor()
+        sql_search = "SELECT username, password,usetype,user FROM yylp_account WHERE username='%s' " % (username)
+        wz.execute(sql_search)
+        data = wz.fetchall()
+        print(data)
+        if username and password:  # 如果两个都不空
+            if data:
+                if str(data[0][1]) == password:
+
+                    if int(data[0][2]) == 1:
+                        QMessageBox.information(self, '成功', '登陆成功 \n Welcome {}'.format(data[0][3]),
+                                                QMessageBox.Yes | QMessageBox.No)
+                        self.accept()
+                    else:
+                        QMessageBox.information(self, '用户无权限', '请联系管理员开通权限',
+                                                QMessageBox.Yes | QMessageBox.No)
+                else:
+                    QMessageBox.information(self, '失败', '密码错误, 请重试',
+                                            QMessageBox.Yes | QMessageBox.No)
+
+            else:
+                QMessageBox.information(self, '错误', 'No such username', QMessageBox.Yes | QMessageBox.No)
+        elif username:  # 如果用户名填了
+            QMessageBox.information(self, 'Error', '请输入密码', QMessageBox.Yes | QMessageBox.No)
+        else:
+            QMessageBox.information(self, 'Error', '请输入账号', QMessageBox.Yes | QMessageBox.No)
+
+        # connect = sqlite3.connect('./data.db')  # 链接数据库
+        # cursor = connect.cursor()
+        # username = self.username_edit.text()  # 获取账号
+        # password = self.password_edit.text()  # 获取密码
+        # sql = 'SELECT username, password FROM data WHERE username=?'  # 从数据库中读取数据
+        # result = cursor.execute(sql, (username,))
+        # data = result.fetchall()
+        # if username and password:  # 如果两个都不空
+        #     if data:
+        #         if str(data[0][1]) == password:
+        #             QMessageBox.information(self, 'Successfully', 'Login in successful \n Welcome {}'.format(username),
+        #                                     QMessageBox.Yes | QMessageBox.No)
+        #         else:
+        #             QMessageBox.information(self, 'Failed', 'Password is wrong, try again',
+        #                                     QMessageBox.Yes | QMessageBox.No)
+        #
+        #     else:
+        #         QMessageBox.information(self, 'Error', 'No such username', QMessageBox.Yes | QMessageBox.No)
+        # elif username:  # 如果用户名填了
+        #     QMessageBox.information(self, 'Error', 'Input your password', QMessageBox.Yes | QMessageBox.No)
+        # else:
+        #     QMessageBox.information(self, 'Error', 'Fill in the blank', QMessageBox.Yes | QMessageBox.No)
+
+    def signup(self):
+        user = self.zc_username_3.text()  # 获取
+        username = self.zc_username_5.text()  # 获取账号
+        password = self.zc_username_4.text()  # 获取密码
+        password2 = self.zc_username_6.text()  # 获取密码
+        usetype=2
+
+        db = pymysql.connect(host="121.4.74.156", user="yylptx", passwd="hrjwan688", port=3306, db="yylptx")
+
+        # db = pymysql.connect(host="121.4.74.156", user="ddtest", passwd="688688", port=3306, db="ddtest")
+        wz = db.cursor()
+        sql_search = "SELECT username, password FROM yylp_account  "
+
+        wz.execute(sql_search)
+        data = wz.fetchall()
+        usernamelist=[]
+        for i in range(0,len(data)):
+            username1=data[i][0]
+            usernamelist.append(username1)
+
+
+
+
+        if username and password and user and password2:
+            if username in usernamelist:
+                QMessageBox.information(self, '账号已被注册', '请使用其他账号id', QMessageBox.Yes | QMessageBox.No)
+
+            else:
+
+                if password != password2:
+                    QMessageBox.information(self, '两次密码输入不一致', '请检查后输入', QMessageBox.Yes | QMessageBox.No)
+
+                else:
+                    try:
+                        wz.execute(
+                            "insert into yylp_account (username,password,user,usetype) values ('%s','%s','%s','%s')" % (
+                                username,password,user,usetype))
+                        db.commit()
+                        QMessageBox.information(self, '注册成功//请联系管理员开通权限',  '请联系管理员开通权限', QMessageBox.Yes | QMessageBox.No)
+                    except:
+                        QMessageBox.information(self, '注册失败',  '请联系管理员', QMessageBox.Yes | QMessageBox.No)
+
+
+
+
+
+
+        else:
+            QMessageBox.information(self, 'Error', '请填写完整', QMessageBox.Yes | QMessageBox.No)
+
+
+
+
+class Setstatuslist(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Setstatuslist,self).__init__()
+
+    def run(self):
+
+        i = '正在获取门店列表'
+        self.signal.emit(str(i))
+
+
+
+        arr = wz.execute("SELECT distinct poi,shop_name FROM jingjia_set ")
+        data = wz.fetchall()  # 通过fetchall方法获得数据
+
+        print(len(setnamelist))
+        if len(setnamelist)>2:
+            print(1)
+            pass
+        else:
+            print(2)
+            for x in range(0, len(data)):
+                shopname=data[x][1]
+                setnamelist.append(shopname)
+            self.comboBox_2.addItems(setnamelist)
+            QApplication.processEvents()
+        i = '获取门店列表成功'
+        self.signal.emit(str(i))
+class Setstatus(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Setstatus,self).__init__()
+
+    def run(self):
+
+
+        def set_status(poi, n):
+
+            # arr = wz.execute("SELECT * FROM jingjia_set where poi='%s'" % (poi))
+
+            arr = wz.execute(
+                "SELECT max(create_time) FROM jingjia_set GROUP BY poi HAVING poi='%s'" %
+                poi)
+
+            maxupdate = wz.fetchall()[0][0]
+
+
+            arr = wz.execute(
+                "SELECT * FROM jingjia_set where poi='%s' and create_time ='%s'" % (
+                    poi, maxupdate))
+
+
+            data = wz.fetchall()
+            print(data)
+
+            timelonglist=data[-1]#全部数据
+
+            daymubiao=timelonglist[3]
+            maxprice=timelonglist[4]
+            minprice = timelonglist[5]
+            pricestep = timelonglist[6]
+            jiange=timelonglist[7]
+
+            self.lineEdit_2.setEnabled(False)
+
+            self.lineEdit_3.setText(str(daymubiao))
+            self.lineEdit_3.setEnabled(False)
+
+            self.lineEdit_4.setText(str(maxprice))
+            self.lineEdit_4.setEnabled(False)
+            self.lineEdit_5.setText(str(jiange))
+            self.lineEdit_5.setEnabled(False)
+            self.lineEdit_6.setText(str(minprice))
+            self.lineEdit_6.setEnabled(False)
+            self.lineEdit_7.setText(str(pricestep))
+            self.lineEdit_7.setEnabled(False)
+
+
+            n=8
+
+            for s in (1,4,7,10):
+                item1 = QTableWidgetItem(str(timelonglist[n]))
+                item2 = QTableWidgetItem(str(timelonglist[n + 1]))
+                item3 = QTableWidgetItem(str(timelonglist[n + 2]))
+                item4 = QTableWidgetItem(str(timelonglist[n + 3]))
+                item5 = QTableWidgetItem(str(timelonglist[n + 4]))
+                item6 = QTableWidgetItem(str(timelonglist[n + 5]))
+                n = n + 6
+
+                self.tableWidget_3.setItem(s, 0, item1)
+                self.tableWidget_3.setItem(s, 1, item2)
+                self.tableWidget_3.setItem(s, 2, item3)
+                self.tableWidget_3.setItem(s, 3, item4)
+                self.tableWidget_3.setItem(s, 4, item5)
+                self.tableWidget_3.setItem(s, 5, item6)
+
+        def set_title():
+
+
+            #
+            # self.tableWidget_3.setSpan(10, 0, 2, 5)  # 从第（10.0）合并2行 5列
+
+            timelonglist = []
+
+            for tl in range(1, 25):
+                timestr = str(tl - 1) + '-' + str(tl)+'(%)'
+                timelonglist.append(timestr)
+            # print(timelonglist)
+
+            n = 0
+            for s in (0,3,6,9):
+
+
+                item1 = QTableWidgetItem(str(timelonglist[n]))
+                item2 = QTableWidgetItem(str(timelonglist[n+1]))
+                item3 = QTableWidgetItem(str(timelonglist[n+2]))
+                item4 = QTableWidgetItem(str(timelonglist[n+3]))
+                item5 = QTableWidgetItem(str(timelonglist[n+4]))
+                item6 = QTableWidgetItem(str(timelonglist[n+5]))
+                n=n+6
+
+                self.tableWidget_3.setItem(s, 0, item1)
+                self.tableWidget_3.setItem(s, 1, item2)
+                self.tableWidget_3.setItem(s, 2, item3)
+                self.tableWidget_3.setItem(s, 3, item4)
+                self.tableWidget_3.setItem(s, 4, item5)
+                self.tableWidget_3.setItem(s, 5, item6)
+
+            self.tableWidget_3.setSpan(2, 0, 1, 6)  # 从第（10.0）合并2行 5列
+            self.tableWidget_3.setSpan(5, 0, 1, 6)
+            self.tableWidget_3.setSpan(8, 0, 1, 6)
+            self.tableWidget_3.setSpan(11, 0, 1, 6)
+
+
+            for wi in range(0,6):
+                self.tableWidget_3.setColumnWidth(wi, 100)
+
+        def data_2(poi):
+
+            today = datetime.datetime.now()
+            offset1 = datetime.timedelta(days=-1)
+            offset2 = datetime.timedelta(days=-7)
+
+            redate1=(today+offset1).strftime('%Y-%m-%d')
+            redate2 = (today + offset2).strftime('%Y-%m-%d')
+            # print('周日期')
+            # print(redate1,redate2)
+
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM dayliuliang_shuju"
+
+            wz.execute(sql_distinct)
+
+            sqlbaoguang1_7 = "SELECT IFNULL(sum( bgrenshu),0) FROM distinct_info where poi='%s' and ( date between '%s' and '%s')" % (
+                poi, redate2, redate1)  # 近一周的数据
+
+            wz.execute(sqlbaoguang1_7)
+            bgdata = wz.fetchone()[0]  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+
+            global day7sum_showCount
+
+            day7sum_showCount = bgdata
+
+
+        x=self.x
+
+
+        arr = wz.execute("SELECT poi,shop_name FROM jingjia_set ")
+        dataz = wz.fetchall()  # 通过fetchall方法获得数据
+
+
+
+        global finish_shopname,finish_poi
+
+        finish_shopname= dataz[x][1]
+        finish_poi=dataz[x][0]
+        print('店铺为' + str(dataz[x][1]))
+
+        self.tableWidget_3.setRowCount(15)
+        self.tableWidget_3.setColumnCount(6)
+
+        self.tableWidget_3.verticalHeader().setVisible(False)  # 隐藏垂直表头
+        self.tableWidget_3.horizontalHeader().setVisible(False)  # 隐藏水平表头
+        QApplication.processEvents()
+
+        try:
+            set_title()
+
+            set_status(dataz[x][0], dataz[x][1])
+
+            data_2(dataz[x][0])
+
+            i = str(dataz[x][1]) + '查询完毕'
+            self.signal.emit(str(i))
+
+
+        except Exception as e:
+            print(e)
+            i = str(e)
+
+            self.signal.emit(str(i))
+
+        for w in range(0, 6):
+            self.tableWidget_3.setColumnWidth(w, 80)
+            if 'exists' in str(e):
+                sql_del = "DROP VIEW distinct_info"
+                wz.execute(sql_del)  # 删除视图
+class Seting(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Seting,self).__init__()
+
+    def run(self):
+
+
+        def set_status():
+
+
+            self.lineEdit_2.setEnabled(True)
+
+
+            self.lineEdit_3.setEnabled(True)
+
+
+            self.lineEdit_4.setEnabled(True)
+
+            self.lineEdit_5.setEnabled(True)
+
+            self.lineEdit_6.setEnabled(True)
+
+            self.lineEdit_7.setEnabled(True)
+
+
+
+
+
+        self.tableWidget_3.setRowCount(15)
+        self.tableWidget_3.setColumnCount(6)
+
+        self.tableWidget_3.verticalHeader().setVisible(False)  # 隐藏垂直表头
+        self.tableWidget_3.horizontalHeader().setVisible(False)  # 隐藏水平表头
+        QApplication.processEvents()
+
+        try:
+
+            set_status()
+
+            i = '竞价数据设置中'
+            self.signal.emit(str(i))
+
+
+        except Exception as e:
+
+            print(e)
+
+            i = str(e)
+
+            self.signal.emit(str(i))
+class Setfinish(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Setfinish,self).__init__()
+
+    def run(self):
+
+        def xiugai():
+            inster_date = today.strftime('%Y-%m-%d %H:%M:%S')
+            daymubiao = self.lineEdit_3.text()
+            maxprice = self.lineEdit_4.text()
+            jiange = self.lineEdit_5.text()
+            minprice = self.lineEdit_6.text()
+            pricestep = self.lineEdit_7.text()
+            print(inster_date, daymubiao, maxprice, jiange, minprice, pricestep)
+
+            poi = finish_poi
+            shop_name = finish_shopname
+            print('finish')
+            print(poi, shop_name)
+
+            ts1 = float(self.tableWidget_3.item(1, 0).text())
+            ts2 = float(self.tableWidget_3.item(1, 1).text())
+            ts3 = float(self.tableWidget_3.item(1, 2).text())
+            ts4 = float(self.tableWidget_3.item(1, 3).text())
+            ts5 = float(self.tableWidget_3.item(1, 4).text())
+            ts6 = float(self.tableWidget_3.item(1, 5).text())
+            print(ts1, ts2, ts3, ts4, ts5, ts6)
+
+            ts7 = float(self.tableWidget_3.item(4, 0).text())
+            ts8 = float(self.tableWidget_3.item(4, 1).text())
+            ts9 = float(self.tableWidget_3.item(4, 2).text())
+            ts10 = float(self.tableWidget_3.item(4, 3).text())
+            ts11 = float(self.tableWidget_3.item(4, 4).text())
+            ts12 = float(self.tableWidget_3.item(4, 5).text())
+            print(ts7, ts8, ts9, ts10, ts11, ts12)
+
+            ts13 = float(self.tableWidget_3.item(7, 0).text())
+            ts14 = float(self.tableWidget_3.item(7, 1).text())
+            ts15 = float(self.tableWidget_3.item(7, 2).text())
+            ts16 = float(self.tableWidget_3.item(7, 3).text())
+            ts17 = float(self.tableWidget_3.item(7, 4).text())
+            ts18 = float(self.tableWidget_3.item(7, 5).text())
+            print(ts13, ts14, ts15, ts16, ts17, ts18)
+
+            ts19 = float(self.tableWidget_3.item(10, 0).text())
+            ts20 = float(self.tableWidget_3.item(10, 1).text())
+            ts21 = float(self.tableWidget_3.item(10, 2).text())
+            ts22 = float(self.tableWidget_3.item(10, 3).text())
+            ts23 = float(self.tableWidget_3.item(10, 4).text())
+            ts24 = float(self.tableWidget_3.item(10, 5).text())
+            print(ts19, ts20, ts21, ts22, ts23, ts24)
+
+            sum = ts1 + ts2 + ts3 + ts4 + ts5 + ts6 + ts7 + ts8 + ts9 + ts10 + ts11 + ts12 + ts13 + ts14 + ts15 + ts16 + ts17 + ts18 + ts19 + ts20 + ts21 + ts22 + ts23 + ts24
+
+            print(sum)
+            if sum >= 105:
+
+                i = '系数之和大于105，请检查后重新输入'
+
+                self.signal.emit(str(i))
+
+                print('错误')
+            elif sum <= 95:
+                i = '系数之和小于95，请检查后重新输入'
+
+                self.signal.emit(str(i))
+
+
+            else:
+
+                inster_sql = "insert into jingjia_set (create_time,poi,shop_name,day_showCount,max_price,min_price,add_price,time_interval," \
+                             "ts1,ts2,ts3,ts4,ts5,ts6,ts7, ts8, ts9, ts10, ts11, ts12, ts13, ts14, ts15, ts16, ts17, ts18,ts19, ts20, ts21, ts22, ts23, ts24) " \
+                             "values ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (
+                             inster_date, poi, shop_name, daymubiao, maxprice, minprice, pricestep, jiange,
+                             ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8, ts9, ts10, ts11, ts12, ts13, ts14, ts15, ts16,
+                             ts17, ts18, ts19, ts20, ts21, ts22, ts23, ts24)
+
+                # inster_sql = "insert into jingjia_set (create_time,poi,shop_name,day_showCount,max_price,min_price,add_price," \
+                #              "time_interval,ts1) " \
+                #              "values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (
+                #              inster_date, poi, shop_name, daymubiao, maxprice, minprice, pricestep, jiange,ts1)
+
+                wz.execute(inster_sql)
+
+                db.commit()
+                i = str(shop_name) + '竞价参数修改成功'
+
+                self.signal.emit(str(i))
+
+        try:
+
+            xiugai()
+
+        except Exception as e:
+
+            print(e)
+
+            i = str(e)
+
+            self.signal.emit(str(i))
+class Zhanbizhuanghua(QThread):  # 建立一个任务线程类
+                signal = pyqtSignal(str)  # 设置触发信号传递的参数数据类型,
+
+                def __init__(self):
+                    super(Zhanbizhuanghua, self).__init__()
+
+                def run(self):
+
+
+
+                    try:
+                        zhuanghua_xishu = self.lineEdit_2.text()
+
+                        print(zhuanghua_xishu, day7sum_showCount)
+
+                        zhuanhua_mubiao = int(int(zhuanghua_xishu) / 100 * int(day7sum_showCount)/7)
+
+
+                        self.lineEdit_3.setText(str(zhuanhua_mubiao))
+                        self.lineEdit_3.setEnabled(False)
+                        i = '最近一周的总曝光为'+str(day7sum_showCount)+'。  转化成功'
+
+                        self.signal.emit(str(i))
+
+                    except Exception as e:
+
+                        print(e)
+
+                        i = str(e)
+
+                        self.signal.emit(str(i))
+
+
+
+class Checkstatuslist(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Checkstatuslist,self).__init__()
+
+    def run(self):
+        i = '正在获取门店列表'
+        self.signal.emit(str(i))
+        arr = wz.execute("SELECT distinct poi,shop_name FROM jingjia_set ")
+        data = wz.fetchall()  # 通过fetchall方法获得数据
+
+        print(len(checknamelist))
+        if len(checknamelist)>2:
+            pass
+        else:
+            for x in range(0, len(data)):
+                shopname=data[x][1]
+                checknamelist.append(shopname)
+            self.comboBox.addItems(checknamelist)
+            QApplication.processEvents()
+        i = '获取门店列表成功'
+        self.signal.emit(str(i))
+class Checkstatus(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Checkstatus,self).__init__()
+
+    def run(self):
+
+
+        def check_status(poi, n):
+
+            checkdate=today.strftime('%Y-%m-%d')
+
+            arr = wz.execute("SELECT * FROM jinjia_caozuo where poi='%s'and day='%s'" % (poi,checkdate))
+
+            data = wz.fetchall()
+
+            self.tableWidget_2.setRowCount(len(data))
+
+            for ce in range(0,len(data)):
+
+                list=data[ce]#全部数据
+                # self.tableWidget_2.setHorizontalHeaderLabels(
+                #     ['门店', '日期', '时间', '目标系数', '分时目标', '实际完成', '完成度', '上一次出价', '本次出价', '本次变动'])
+
+
+                check_shopname=n
+                day=list[1]
+                time=list[2]
+                try:
+                    xishu_mubiao=str(round(float(list[4])*100,2))+'%'
+                except:
+                    xishu_mubiao = list[4]
+
+                fengshi_mubiao= list[3]
+                now_showCount = list[6]
+                try:
+                    sc_degree=str(round(int(list[6])/int(list[3])*100,2))+'%'
+                except:
+                    sc_degree ='0%'
+
+                oldprice=list[7]
+
+                caozuo = list[8]
+                price= list[9]
+
+            # print(xishu_mubiao,fengshi_mubiao,now_showCount,sc_degree)
+
+                item1 = QTableWidgetItem(str(check_shopname))
+                item2 = QTableWidgetItem(str(day))
+                item3 = QTableWidgetItem(str(time))
+                item4 = QTableWidgetItem(str(xishu_mubiao))
+                item5 = QTableWidgetItem(str(fengshi_mubiao))
+                item6 = QTableWidgetItem(str(now_showCount))
+                item7 = QTableWidgetItem(str(sc_degree))
+                item8 = QTableWidgetItem(str(oldprice))
+                item9 = QTableWidgetItem(str(caozuo))
+                item10 = QTableWidgetItem(str(price))
+
+                self.tableWidget_2.setItem(ce, 0, item1)
+                self.tableWidget_2.setItem(ce, 1, item2)
+                self.tableWidget_2.setItem(ce, 2, item3)
+                self.tableWidget_2.setItem(ce, 3, item4)
+                self.tableWidget_2.setItem(ce, 4, item5)
+                self.tableWidget_2.setItem(ce, 5, item6)
+                self.tableWidget_2.setItem(ce, 6, item7)
+                self.tableWidget_2.setItem(ce, 7, item8)
+                self.tableWidget_2.setItem(ce, 8, item9)
+                self.tableWidget_2.setItem(ce, 9, item10)
+
+        def check_status2(poi):
+            arr = wz.execute(
+                "SELECT max(create_time) FROM jingjia_set GROUP BY poi HAVING poi='%s'" %
+                poi)
+
+            maxupdate = wz.fetchall()[0][0]
+
+            arr = wz.execute(
+                "SELECT * FROM jingjia_set where poi='%s' and create_time ='%s'" % (
+                    poi, maxupdate))
+
+            data = wz.fetchall()
+
+
+
+
+            h = int(time.strftime("%H", time.localtime()))
+            hm = int(time.strftime("%H%M", time.localtime()))
+            m = int(time.strftime("%M", time.localtime()))
+
+            day_showcount = int(data[-1][3])
+
+            sumxishu = 0
+
+            for u in range(0, h):
+                # print(data[0][u + 8])
+                sumxishu = sumxishu + data[-1][u + 8]
+
+
+            sumxishu= round((sumxishu)/100,4)
+            jihuanbg = round(sumxishu * day_showcount, 0)
+
+            true_data = get_che_xiaoshi(poi)
+
+            sum_true_showcount = 0
+            for s in range(0, h):
+                sum_true_showcount = sum_true_showcount + true_data['data']['today'][s]['showCount']
+
+            print(day_showcount)
+            print(sumxishu)
+            print(jihuanbg)
+            print(sum_true_showcount)
+
+            self.lineEdit_8.setText(str(day_showcount))
+            self.lineEdit_8.setEnabled(False)
+            self.lineEdit_9.setText(str(jihuanbg))
+            self.lineEdit_9.setEnabled(False)
+            self.lineEdit_10.setText(str(sum_true_showcount))
+            self.lineEdit_10.setEnabled(False)
+
+        def getkey(poi):
+            type = 1
+            arr = wz.execute(
+                "SELECT cookies,region_id,region_version,acctId,bizad_cityId,bizad_second_city_id,bizad_third_city_id FROM yylp_shop where poi='%s' and type='%s'" % (
+                    poi, type))
+            data = wz.fetchall()  # 通过fetchall方法获得数据
+            return data
+
+        def get_che_xiaoshi(poi):
+            arr = getkey(poi)
+            cookie = arr[0][0]
+            region_id = arr[0][1]
+            region_version = arr[0][2]
+            acctId = arr[0][3]
+            bizad_cityId = arr[0][4]
+            bizad_second_city_id = arr[0][5]
+            bizad_third_city_id = arr[0][6]
+
+            cookies = {}
+            for line in cookie.split(";"):
+                if line.find("=") != -1:
+                    name, value = line.strip().split("=", 1)
+                    cookies[name] = value
+            key = {}
+            token = cookies['token']
+            url = 'https://waimaieapp.meituan.com/ad/v3/statistics/cpc/today/info?acctId=' + str(
+                acctId) + '&wmPoiId=' + str(
+                poi) + '&token=' + str(
+                token) + '&platform=0&bizad_cityId=310100&bizad_second_city_id=310100&bizad_third_city_id=310113'
+            headers = {'Accept': 'application/json, text/plain, */*', 'X-Requested-With': 'XMLHttpRequest',
+                       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+                       'Referer': 'http://e.waimai.meituan.com/v2/order/new/history?region_id=' + str(
+                           region_id) + '&region_version=' + str(region_version),
+                       'Content-Type': 'application/json;charset=UTF-8', 'charset': 'UTF-8'}
+            r = requests.get(url=url, headers=headers, cookies=cookies, timeout=(9, 12))
+            data = json.loads(r.text)
+            return (data)
+
+        x=self.x
+        arr = wz.execute("SELECT poi,shop_name FROM jingjia_set ")
+        dataz = wz.fetchall()  # 通过fetchall方法获得数据
+
+        finish_shopname= dataz[x][1]
+        finish_poi=dataz[x][0]
+        print('店铺为' + str(dataz[x][1]))
+
+
+        self.tableWidget_2.setColumnCount(10)
+        self.tableWidget_2.setHorizontalHeaderLabels(['门店', '日期', '时间', '小时目标系数','分时目标', '实际完成','完成度','上一次出价','本次变动','本次出价'])
+        QApplication.processEvents()
+
+        try:
+
+
+            check_status(dataz[x][0], dataz[x][1])
+            check_status2(dataz[x][0])
+
+
+            for w in (0, 2,6):
+                self.tableWidget_2.setColumnWidth(w, 80)
+
+            for w in (1, 3,4,5,7,8,9,10):
+                self.tableWidget_2.setColumnWidth(w, 100)
+
+            i = str(dataz[x][1]) + '查询完毕'
+            self.signal.emit(str(i))
+
+
+
+        except Exception as e:
+
+            print(e)
+
+            i = str(e)
+
+            self.signal.emit(str(i))
+
+        for h in (1, 3,4,5,7,8,9,10):
+
+            self.tableWidget_2.setRowHeight(h,random.randint(55, 65))
+
+
+class Yanalysislist(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Yanalysislist,self).__init__()
+
+    def run(self):
+        i = '正在获取门店列表'
+        self.signal.emit(str(i))
+        arr = wz.execute("SELECT distinct poi,shop_name FROM jingjia_set ")
+        data = wz.fetchall()  # 通过fetchall方法获得数据
+        global startdatestr,enddatestr
+        startdatestr = str(zdyDatestart)
+        print('获取到开始时间')
+        print(startdatestr)
+
+        enddatestr = str(zdyDateend)
+        print('获取到结束时间')
+        print(enddatestr)
+
+        print(len(shopnamelist))
+        if len(shopnamelist)>2:
+            pass
+        else:
+            for x in range(0, len(data)):
+                shopname=data[x][1]
+                shopnamelist.append(shopname)
+            self.comboBox_3.addItems(shopnamelist)
+            QApplication.processEvents()
+        i = '数据刷新成功'
+        self.signal.emit(str(i))
+class Yanalysis(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+
+
+    def __init__(self):
+        super(Yanalysis,self).__init__()
+
+    def run(self):
+
+
+        def liuliang_24h(poi):
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM fengshi_24h_baoguang"
+            wz.execute(sql_distinct)  # 创建视图
+            sqlbaoguang1_7 = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                             " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                             "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                             "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                             "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                             "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                             " FROM distinct_info where poi='%s'and type='%s'and ( date between '%s' and '%s') " % (
+                             poi, 'base', d7, d1)
+            # print(poi, d1, d7
+            wz.execute(sqlbaoguang1_7)
+            bgdata = wz.fetchone()  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+            bgdatalist = []
+            for bgi in bgdata:
+                bgdatalist.append(bgi)
+
+            bgdict = {'name': '分时总曝光', 'data': bgdatalist}
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM fengshi_24h_rudian"
+            wz.execute(sql_distinct)  # 创建视图
+            sqlrd1_7 = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                       " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                       "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                       "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                       "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                       "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                       " FROM distinct_info where poi='%s'and type='%s'and ( date between '%s' and '%s') " % (
+                           poi, 'base', d7, d1)
+            wz.execute(sqlrd1_7)
+            rddata = wz.fetchone()  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+            rddatalist = []
+            for rdi in rddata:
+                rddatalist.append(rdi)
+
+            rddict = {'name': '分时总入店', 'data': rddatalist}
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM fengshi_24h_xiadan"
+            wz.execute(sql_distinct)  # 创建视图
+            sqlxd1_7 = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                       " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                       "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                       "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                       "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                       "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                       " FROM distinct_info where poi='%s'and type='%s'and ( date between '%s' and '%s') " % (
+                           poi, 'base', d7, d1)
+            wz.execute(sqlrd1_7)
+            xddata = wz.fetchone()  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+            xddatalist = []
+            for xdi in xddata:
+                xddatalist.append(xdi)
+
+            xddict = {'name': '分时总下单', 'data': xddatalist}
+
+            rddatalistz = []
+            xddatalistz = []
+
+
+            for zi in range(0, 24):
+                try:
+                    rdzii = str(round((rddatalist[zi] / bgdatalist[zi]) * 100, 2)) + '%'
+                except:
+                    rdzii = '0%'
+                try:
+                    xdzii = str(round((xddatalist[zi] / rddatalist[zi]) * 100, 2)) + '%'
+                except:
+                    xdzii = '0%'
+                rddatalistz.append(rdzii)
+                xddatalistz.append(xdzii)
+
+            xdzdict = {'name': '分时下单转化率', 'data': xddatalistz}
+            rdzdict = {'name': '分时入店转化率', 'data': rddatalistz}
+
+            bgsum = 0
+            rdsum = 0
+            xdsum = 0
+
+            for si in range(0, len(bgdatalist)):
+                bgsum = bgsum + bgdatalist[si]
+                rdsum = rdsum + rddatalist[si]
+                xdsum = xdsum + xddatalist[si]
+
+            # print(bgsum, rdsum, xdsum)
+
+            bgzbdatalist = []
+            rdzbdatalist = []
+            xdzbdatalist = []
+
+            for zbi in range(0, len(bgdatalist)):
+                try:
+                    bfzb = str(round((bgdatalist[zbi] / bgsum) * 100, 2)) + '%'
+                except:
+                    bfzb = '0%'
+
+                try:
+                    rdzb = str(round((rddatalist[zbi] / rdsum) * 100, 2)) + '%'
+                except:
+                    rdzb = '0%'
+                try:
+                    xdzb = str(round((xddatalist[zbi] / xdsum) * 100, 2)) + '%'
+                except:
+                    xdzb = '0%'
+
+                bgzbdatalist.append(bfzb)
+                rdzbdatalist.append(rdzb)
+                xdzbdatalist.append(xdzb)
+
+            bgzbdict = {'name': '分时曝光/日曝光', 'data': bgzbdatalist}
+            rdzbdict = {'name': '分时入店/日入店', 'data': rdzbdatalist}
+            xdzbdict = {'name': '分时下单/日下单', 'data': xdzbdatalist}
+            # print(bgzbdict)
+            # print(rdzbdict)
+            # print(xdzbdict)
+
+            datadicttotal = [bgdict, rddict, xddict, xdzdict, rdzdict, bgzbdict, rdzbdict, xdzbdict]
+
+            return datadicttotal
+
+        def dianjin_24h(poi):
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM dianjin_fenshi"
+            wz.execute(sql_distinct)  # 创建视图
+
+            sql_showCount = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                            " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                            "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                            "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                            "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                            "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                            " FROM distinct_info where poi='%s'and shujutype='%s'and ( date between '%s' and '%s') " % (
+                                poi, 'showCount', d7, d1)
+            # print(poi, d1, d7
+            wz.execute(sql_showCount)
+            scdata = wz.fetchone()  # 通过fetchall方法获得数据
+
+            sql_clickCount = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                             " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                             "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                             "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                             "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                             "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                             " FROM distinct_info where poi='%s'and shujutype='%s'and ( date between '%s' and '%s') " % (
+                                 poi, 'clickCount', d7, d1)
+            # print(poi, d1, d7
+            wz.execute(sql_clickCount)
+            ccdata = wz.fetchone()
+
+            sql_cost = "SELECT  IFNULL(sum(t0),0) , IFNULL(sum(t1),0), IFNULL(sum(t2),0), IFNULL(sum(t3),0)," \
+                       " IFNULL(sum(t4),0) , IFNULL(sum(t5),0), IFNULL(sum(t6),0), IFNULL(sum(t7),0)," \
+                       "IFNULL(sum(t8),0) , IFNULL(sum(t9),0), IFNULL(sum(t10),0), IFNULL(sum(t11),0)," \
+                       "IFNULL(sum(t12),0) , IFNULL(sum(t13),0), IFNULL(sum(t14),0), IFNULL(sum(t15),0)," \
+                       "IFNULL(sum(t16),0) , IFNULL(sum(t17),0), IFNULL(sum(t18),0), IFNULL(sum(t19),0)," \
+                       "IFNULL(sum(t20),0) , IFNULL(sum(t21),0), IFNULL(sum(t22),0), IFNULL(sum(t23),0)" \
+                       " FROM distinct_info where poi='%s'and shujutype='%s'and ( date between '%s' and '%s') " % (
+                           poi, 'cost', d7, d1)
+            # print(poi, d1, d7
+            wz.execute(sql_cost)
+            ctdata = wz.fetchone()
+
+            wz.execute(sql_del)  # 删除视图
+
+            scdatalist = []
+            for sci in scdata:
+                scdatalist.append(sci)
+
+            scdict = {'name': '分时竞价流量', 'data': scdatalist}
+            # print(scdict)
+
+            ccdatalist = []
+            for cci in ccdata:
+                ccdatalist.append(cci)
+
+            ccdict = {'name': '分时竞价入店', 'data': ccdatalist}
+            # print(ccdict)
+
+            ctdatalist = []
+            for xdi in ctdata:
+                ctdatalist.append(xdi)
+
+            ctdict = {'name': '分时竞价花费', 'data': ctdatalist}
+            # print(ctdict)
+
+            ctpdatalist = []  # 分时价格
+            jjrddatalist = []
+
+            for zi in range(0, 24):
+                try:
+                    ctpii = round(ctdatalist[zi] / ccdatalist[zi], 2)
+                except:
+                    ctpii = 0
+                try:
+                    rdzii = str(round((ccdatalist[zi] / scdatalist[zi]) * 100, 2)) + '%'
+                except:
+                    rdzii = '0%'
+                ctpdatalist.append(ctpii)
+                jjrddatalist.append(rdzii)
+
+            ctpdict = {'name': '分时竞价单价', 'data': ctpdatalist}
+            jjrddict = {'name': '分时竞价入店转化率', 'data': jjrddatalist}
+
+            bgsum = 0
+            rdsum = 0
+            ctsum = 0
+
+            for si in range(0, len(scdatalist)):
+                bgsum = bgsum + scdatalist[si]
+                rdsum = rdsum + ccdatalist[si]
+                ctsum = ctsum + ctdatalist[si]
+
+            # print(bgsum, rdsum, ctsum)
+
+            bgzbdatalist = []
+            rdzbdatalist = []
+            ctzbdatalist = []
+            for zbi in range(0, len(scdatalist)):
+                try:
+                    bfzb = str(round((scdatalist[zbi] / bgsum) * 100, 2)) + '%'
+                except:
+                    bfzb = '0%'
+                try:
+                    rdzb = str(round((ccdatalist[zbi] / rdsum) * 100, 2)) + '%'
+                except:
+                    rdzb = '0%'
+                try:
+                    ctzb = str(round((ctdatalist[zbi] / ctsum) * 100, 2)) + '%'
+                except:
+                    ctzb = '0%'
+
+                bgzbdatalist.append(bfzb)
+                rdzbdatalist.append(rdzb)
+                ctzbdatalist.append(ctzb)
+
+            bgzbdict = {'name': '竞价（分时曝光/日曝光）', 'data': bgzbdatalist}
+            rdzbdict = {'name': '竞价（分时入店/日入店）', 'data': rdzbdatalist}
+            ctzbdict = {'name': '竞价（分时花费/日花费）', 'data': ctzbdatalist}
+            # print(bgzbdict)
+            # print(rdzbdict)
+            # print(ctzbdict)
+
+            datadicttotal = [scdict, ccdict, ctdict, ctpdict, jjrddict, bgzbdict, rdzbdict, ctzbdict]
+
+            return datadicttotal
+
+        def zhanshi(poi, n):
+
+            def huatu1(datailliuliang):
+                datailliuliang=datailliuliang
+                self.pyqtgraph1.clear()
+                list1 = []
+                list2 = []
+                list3 = []
+                for list11 in datailliuliang[5]['data']:
+                    list1.append(float(list11.replace('%', '')))
+
+                for list11 in datailliuliang[6]['data']:
+                    list2.append(float(list11.replace('%', '')))
+                for list11 in datailliuliang[7]['data']:
+                    list3.append(float(list11.replace('%', '')))
+
+
+
+
+
+                x = [ 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+                # y = [10, 12, 15, 16, 20, 25, 26, 28, 30, 25, 36, 38, 39, 55, 42, 41, 20, 12, 10, 23, 2, 35, 36, 37, 56]
+                y1 = list1
+                y2 = list2
+                y3 = list3
+                print(y1)
+
+                '''第二种绘图方式'''
+                plt2 = self.pyqtgraph1.addPlot(title='红线=分时曝光/日曝光 绿线=分时入店/日入店 蓝线=分时下单/日下单')
+                plt2.plot(x=x, y=y1, pen=pg.mkPen(color='r', width=3), name="2")
+                plt2.plot(x=x, y=y2, pen=pg.mkPen(color='g', width=3), name="3")
+                plt2.plot(x=x, y=y3, pen=pg.mkPen(color='b', width=3), name="4")
+
+            def huatu2(dataildianjin,cjdjcbdict):
+                datailliuliang = dataildianjin
+                self.pyqtgraph1_2.clear()
+                list1 = []
+                list2 = []
+
+                for list11 in datailliuliang[5]['data']:
+                    list1.append(float(list11.replace('%', '')))
+
+                for list11 in cjdjcbdict['data']:
+                    list2.append(float(list11))
+
+
+                x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+                # y = [10, 12, 15, 16, 20, 25, 26, 28, 30, 25, 36, 38, 39, 55, 42, 41, 20, 12, 10, 23, 2, 35, 36, 37, 56]
+                y1 = list1
+                y2 = list2
+
+
+
+                '''第二种绘图方式'''
+                plt2 = self.pyqtgraph1_2.addPlot(title='红线=竞价（分时曝光/日曝光） 绿线=成交单单均成本' )
+                plt2.plot(x=x, y=y1, pen=pg.mkPen(color='r', width=3), name="2")
+                plt2.plot(x=x, y=y2, pen=pg.mkPen(color='g', width=3), name="3")
+
+
+
+            datailliuliang = liuliang_24h(poi)
+
+            dataildianjin = dianjin_24h(poi)
+
+
+
+
+            fzzblist = []
+            cjdjcblist = []
+            for jb in range(0, 24):
+                try:
+                    fzzb = str(round((dataildianjin[0]['data'][jb] / datailliuliang[0]['data'][jb]) * 100, 2)) + '%'
+                except:
+                    fzzb = '0%'
+
+                try:
+                    cjdjcb = str(
+                        round((dataildianjin[3]['data'][jb] / (
+                                    float(datailliuliang[3]['data'][jb].replace('%', "")) / 100)),
+                              2))  # 成交单单均成本
+                except:
+                    cjdjcb = '0'
+
+                fzzblist.append(fzzb)
+                cjdjcblist.append(cjdjcb)
+
+            fzzbdict = {'name': '竞价曝光/总曝光', 'data': fzzblist}
+            cjdjcbdict = {'name': '成交单单均成本', 'data': cjdjcblist}
+
+            datailpluslist = [fzzbdict, cjdjcbdict]
+
+            list_zong = datailliuliang + dataildianjin + datailpluslist
+
+            huatu1(datailliuliang)
+            huatu2(dataildianjin,cjdjcbdict)
+
+            # print(dataildataz)
+            # print(dataildatap)
+            # print(dataildatal)
+            # print(dataildatay)
+            # print(dataildatffzb)
+            # print(dataildatad)
+            # print('取数完成')
+            # print(list_zong)
+
+            shop_name = n
+
+            # item1 = QTableWidgetItem(str(shop_name))
+
+            for x in range(0, len(list_zong)):
+                t_name = list_zong[x]['name']
+                y = list_zong[x]['data']
+                # print(t_name, y)
+
+                item1 = QTableWidgetItem(str(shop_name))
+                item2 = QTableWidgetItem(str(t_name))
+                self.tableWidget_4.setItem(x, 0, item1)
+                self.tableWidget_4.setItem(x, 1, item2)
+
+
+
+                for i in range(0,24):
+
+                    item = QTableWidgetItem(str(y[i]))
+                    item.setTextAlignment(Qt.AlignCenter)
+                    # print(str(y[i]))
+                    self.tableWidget_4.setItem(x, i+2, item)
+                    # print(i)
+
+            self.tableWidget_4.setColumnWidth(0, 75)
+            self.tableWidget_4.setColumnWidth(1, 180)
+
+            for xx in range(2, 26):
+                self.tableWidget_4.setColumnWidth(xx, 60)
+
+
+
+
+
+
+
+
+            #     # print('表格填写完成')
+            # self.tableWidget_4.setItem(0, 0, item1)
+
+
+        x=self.x
+        arr = wz.execute("SELECT poi,shop_name FROM jingjia_set ")
+        dataz = wz.fetchall()  # 通过fetchall方法获得数据
+
+        finish_shopname= dataz[x][1]
+        finish_poi=dataz[x][0]
+        print('店铺为' + str(dataz[x][1]))
+
+
+        self.tableWidget_4.setColumnCount(26)
+        self.tableWidget_4.setRowCount(100)
+        self.tableWidget_4.setHorizontalHeaderLabels(['门店', '数据类型', 't0', 't1','t2', 't3','t4','t5','t6','t7','t8','t9','t10',
+                                                      't11','t12', 't13','t14','t15','t16','t17','t18','t19','t20','t21','t22', 't23','t24'])
+        QApplication.processEvents()
+
+
+        startdate = datetime.datetime.strptime(startdatestr, "%Y-%m-%d %H:%M:%S")
+
+        enddate = datetime.datetime.strptime(enddatestr, "%Y-%m-%d %H:%M:%S")
+
+        datakuadu = int((enddate - startdate).days) + 1
+
+
+
+        # today = datetime.datetime.now()
+
+        offset = datetime.timedelta(days=-1)
+
+        endtoday = datetime.datetime.strptime(enddatestr, "%Y-%m-%d %H:%M:%S")  # 结束时间
+
+        re_date = endtoday.strftime('%Y-%m-%d')
+
+        offset7 = datetime.timedelta(days=-datakuadu + 1)
+        re_date7 = (endtoday + offset7).strftime('%Y-%m-%d')
+
+        d1 = re_date
+        d7 = re_date7
+
+
+
+        arr = wz.execute("SELECT poi,shop_name FROM jingjia_set ")
+        data = wz.fetchall()  # 通过fetchall方法获得数据
+        global weekshopname,anastarttime,anaendtime
+        weekshopname=data[x][1]
+        anastarttime=d7
+        anaendtime=d1
+
+        try:
+
+            print('店铺为' + str(data[x][1]))
+            # liuliang_24h(data[x][0])
+            # dianjin_24h(data[x][0])
+            zhanshi(data[x][0], data[x][1])
+
+        except Exception as e:
+            print(e)
+            if 'exists' in str(e):
+                sql_del = "DROP VIEW distinct_info"
+
+                wz.execute(sql_del)  # 删除视图
+        i = str(data[x][1]) + '查询完成' + '||数据当前周期为' + str(d7).replace("00:00:00", "") + '至' + str(d1).replace("00:00:00",
+                                                                                                             "") + '||' + '●▽●'
+
+        self.signal.emit(str(i))
+
+
+
+        self.tableWidget_4.setRowHeight(0,random.randint(55, 65))
+class Yanalysisoutput(QThread): # 建立一个任务线程类
+
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+    def __init__(self):
+        super(Yanalysisoutput,self).__init__()
+
+    def run(self):
+
+        i = '正在导出'
+        self.signal.emit(str(i))
+
+
+        def sheet1():
+
+            rowc=18
+            col = self.tableWidget_4.columnCount()
+            print(rowc,col)
+
+            titlelist= []
+
+            dict_data={}
+
+
+            for i1 in range(0, col):
+
+                item1 = self.tableWidget_4.horizontalHeaderItem(i1).text()
+
+                titlelist.append(item1)
+
+            print(titlelist)
+
+            for i2 in range(0, col):
+                datalist = []
+                for i3 in range(0, rowc):
+                    # print(i2, i3)
+                    item2 = self.tableWidget_4.item(i3, i2).text()
+                    datalist.append(item2)
+
+                dict_data[titlelist[i2]] = datalist
+
+            print(dict_data)
+
+
+
+
+
+
+
+
+
+
+
+            # dict_data = {'门店名称': list1, '数据类型': list2,
+            #              '上一周数据': list3,
+            #              '前一周数据': list4,
+            #              '同比上月数据': list5,
+            #              '周结束时间': list6
+            #              }
+            #
+            df = pd.DataFrame(dict_data)
+
+            df.to_excel(writer, sheet_name='1')
+
+            workbook1 = writer.book
+            worksheets = writer.sheets
+            worksheet1 = worksheets[u'1']
+
+            fmt1 = workbook1.add_format({"font_name": u"微软雅黑", 'align': 'left'})
+            fmt = workbook1.add_format({"font_name": u"微软雅黑", 'align': 'center'})
+            worksheet1.set_column('D:AA', 9, fmt)  # a到j列 15的宽度 样式为fmt
+            worksheet1.set_column('A:A', 5, fmt)
+            worksheet1.set_column('C:C', 22, fmt)
+            worksheet1.set_column('B:B', 12, fmt)
+
+            # worksheet1.set_row(0, 30)
+
+            '''set_row(row, height)
+            方法，用于设定某一行单元格的行高
+            　　（row：指定行位置，起始下标为0；height：为float类型，设定行高，单位像素）
+            set_column(first_col, last_col, width)
+            方法，用于设置一列或多列单元格的列宽
+            　　（first_col：整型，指定开始列位置，起始下标为0；last_col：整型，指定结束列位置，起始下标为0；width：float类型，设置列宽）
+
+            set_column(“first_col: last_col”, width)方法（first_col和last_col用英文字母表示列名，起始为A）'''
+
+        try:
+
+
+
+
+            shopname = weekshopname
+
+            writer = pd.ExcelWriter("./%s %s 至 %s  竞价数据.xlsx" % (
+            shopname, anastarttime,anaendtime))
+
+
+
+            sheet1()
+
+
+
+            i = str(shopname) + '数据表格生成完毕'
+            self.signal.emit(str(i))
+
+            writer.save()
+            writer.close()
+
+
+
+
+        except Exception as e:
+
+            print(e)
+
+            i = str(e)
+
+            self.signal.emit(str(i))
+
+
+
+        # i = str(data[x][1])+'查询完成'+'||数据当前周期为'+str(d7)+'至'+str(d1)+'||'+'●▽●'
+        #
+        #
+        # self.signal.emit(str(i))
+
+class Zlreport(QThread): # 建立一个任务线程类
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+    def __init__(self):
+        super(Zlreport,self).__init__()
+
+
+    def run(self):
+
+        # i = '正在查询'
+        # self.signal.emit(str(i))
+        global startdatestr, enddatestr
+
+        startdatestr = str(zlDatestart)
+        print('获取到开始时间')
+        print(startdatestr)
+
+        enddatestr = str(zlDateend)
+        print('获取到结束时间')
+        print(enddatestr)
+
+        i = '正在查询' + '||当前周期' + str(startdatestr) + '至' + str(enddatestr) + '||' + '●▽●'
+
+        self.signal.emit(str(i))
+
+        def data_1(poi):
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM dayliuliang_shuju"
+
+            wz.execute(sql_distinct)
+
+            sqlbaoguang1_7 = "SELECT IFNULL(sum( bgrenshu),0) FROM distinct_info where poi='%s' and ( date between '%s' and '%s')" % (
+                poi, d7, d1)  # 近一周的数据
+
+            wz.execute(sqlbaoguang1_7)
+            bgdata = wz.fetchone()[0]  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM yingye_shuju"
+
+            wz.execute(sql_distinct)
+
+            sql1_7 = "SELECT IFNULL(sum( shouru),0) FROM distinct_info where poi='%s' and ( date between '%s' and '%s')" % (
+                poi, d7, d1)  # 近一周的数据
+            wz.execute(sql1_7)
+            wdata = wz.fetchone()[0]  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+            bgrenshu = bgdata
+            shouru = wdata
+
+            listda1=[bgrenshu,shouru]
+
+            print(listda1)
+
+            return listda1
+
+        def data_2(poi):
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM danjin_shuju"
+
+            wz.execute(sql_distinct)
+
+            sql1_7 = "SELECT IFNULL(sum( showCount),0) ," \
+                     "IFNULL(sum(debit),0),IFNULL(sum(clickCount),0),IFNULL(sum(clickCountbc),0),IFNULL(sum(debitbc),0) " \
+                     "FROM distinct_info where poi='%s' and ( date between '%s' and '%s')" % (
+                         poi, d7, d1)  # 近一周的数据
+
+            wz.execute(sql1_7)
+            wdata = wz.fetchone()  # 通过fetchall方法获得数据
+            wz.execute(sql_del)  # 删除视图
+
+            print(wdata)
+
+            showCount = wdata[0]
+
+            debit = wdata[1]
+            try:
+                cpc = round(wdata[1] / int(wdata[2]), 2)
+            except:
+                cpc = 0
+            try:
+                cpcbc = round(int(wdata[3]) / wdata[4], 2)
+            except:
+                cpcbc = 0
+
+            listda1 = [showCount, debit, cpc, cpcbc]
+
+            print(listda1)
+            return listda1
+
+
+
+
+        def data_3(poi):
+
+            sql_del = "DROP VIEW distinct_info"
+
+            sql_distinct = "CREATE VIEW distinct_info as select distinct * FROM dianjin_status"
+
+            wz.execute(sql_distinct)
+
+            sql1_7 = "SELECT IFNULL(sum(day_showCount),0),IFNULL(sum(true_showCount),0) FROM distinct_info where poi='%s' and ( up_date between '%s' and '%s')" % (
+                poi, d7, d1)  # 近一周的数据
+
+            wz.execute(sql1_7)
+            wdata = wz.fetchall()  # 通过fetchall方法获得数据
+            mubiao=wdata[0][0]
+            shiji=wdata[0][1]
+            try:
+                xishu1 = str(round(wdata[0][1] / wdata[0][0], 2) * 100) + '%'
+            except:
+                xishu1 = '0%'
+            wz.execute(sql_del)
+
+            # wz.execute(sql_fresh)
+            # freshday_showCount = wz.fetchall()[0][3]
+
+
+
+
+            listda1 = [mubiao, shiji,xishu1]
+
+            return listda1
+            print(listda1)
+
+            # print(freshday_showCount)
+
+
+
+
+        def zhanshi(poi, n,x):
+            data_11=data_1(poi)
+            data_22 = data_2(poi)
+            data_33 = data_3(poi)
+
+            bgrenshu = data_11[0]
+            shouru = data_11[1]
+
+            showCount = data_22[0]
+            debit = data_22[1]
+            cpc = data_22[2]
+            cpcbc = data_22[3]
+
+            mubiao=data_33[0]
+            xishu1= data_33[2]
+
+            try:
+                xishu_baoguang=str(round((showCount/bgrenshu)*100,2))+'%'
+            except:
+                xishu_baoguang='0%'
+
+            try:
+                xishu_huafei=str(round((debit/shouru)*100,2))+'%'
+            except:
+                xishu_huafei='0%'
+            shop_name = n
+            print(shop_name,shouru,bgrenshu,showCount,debit,xishu_baoguang,xishu_huafei,cpc,cpcbc,mubiao,xishu1)
+
+
+            item1 = QTableWidgetItem(str(shop_name))
+            item2 = QTableWidgetItem(str(bgrenshu))
+            item3 = QTableWidgetItem(str(shouru))
+
+            item4 = QTableWidgetItem(str(showCount))
+            item5 = QTableWidgetItem(str(debit))
+            item6 = QTableWidgetItem(str(xishu_baoguang))
+            item7 = QTableWidgetItem(str(xishu_huafei))
+            item8 = QTableWidgetItem(str(cpc))
+            item9 = QTableWidgetItem(str(cpcbc))
+            item10 = QTableWidgetItem(str(mubiao))
+            item11 = QTableWidgetItem(str(xishu1))
+
+
+            item1.setTextAlignment(Qt.AlignCenter)
+            item2.setTextAlignment(Qt.AlignCenter)
+            item3.setTextAlignment(Qt.AlignCenter)
+            item4.setTextAlignment(Qt.AlignCenter)
+            item5.setTextAlignment(Qt.AlignCenter)
+            item6.setTextAlignment(Qt.AlignCenter)
+            item7.setTextAlignment(Qt.AlignCenter)
+            item8.setTextAlignment(Qt.AlignCenter)
+            item9.setTextAlignment(Qt.AlignCenter)
+            item10.setTextAlignment(Qt.AlignCenter)
+            item11.setTextAlignment(Qt.AlignCenter)
+
+            self.tableWidget.setItem(x, 0, item1)
+            self.tableWidget.setItem(x, 1, item2)
+            self.tableWidget.setItem(x, 2, item3)
+            self.tableWidget.setItem(x, 3, item4)
+            self.tableWidget.setItem(x, 4, item5)
+            self.tableWidget.setItem(x, 5, item6)
+            self.tableWidget.setItem(x, 6, item7)
+            self.tableWidget.setItem(x, 7, item8)
+            self.tableWidget.setItem(x, 8, item9)
+            self.tableWidget.setItem(x, 9, item10)
+            self.tableWidget.setItem(x, 10, item11)
+
+
+
+            self.tableWidget.setColumnWidth(0, 75)
+            self.tableWidget.setColumnWidth(1, 100)
+
+
+
+            #     # print('表格填写完成')
+            # self.tableWidget_4.setItem(0, 0, item1)
+        self.tableWidget.setColumnCount(11)
+        self.tableWidget.setRowCount(100)
+        self.tableWidget.setHorizontalHeaderLabels(
+            ['门店', '总曝光', '总收入', '竞价曝光', '竞价花费', '竞价曝光/总曝光', '竞价花费/总收入', '平均出价', '商圈平均出价', '目标曝光', '竞价曝光/目标曝光'])
+        QApplication.processEvents()
+
+        startdate = datetime.datetime.strptime(startdatestr, "%Y-%m-%d %H:%M:%S")
+
+        enddate = datetime.datetime.strptime(enddatestr, "%Y-%m-%d %H:%M:%S")
+
+        datakuadu = int((enddate - startdate).days) + 1
+
+        # today = datetime.datetime.now()
+
+        offset = datetime.timedelta(days=-1)
+
+        endtoday = datetime.datetime.strptime(enddatestr, "%Y-%m-%d %H:%M:%S")  # 结束时间
+
+        re_date = endtoday.strftime('%Y-%m-%d')
+
+        offset7 = datetime.timedelta(days=-datakuadu + 1)
+        re_date7 = (endtoday + offset7).strftime('%Y-%m-%d')
+
+        d1 = re_date
+        d7 = re_date7
+
+        arr = wz.execute("SELECT distinct poi,shop_name FROM jingjia_set ")
+        data = wz.fetchall()  # 通过fetchall方法获得数据
+
+
+        global mengdiancount,zlstarttime, zlendtime
+        mengdiancount = len(data)
+        zlstarttime = d7
+        zlendtime = d1
+
+        try:
+            # data_3(data[1][0])
+            for x in range(0, len(data)):
+                print(data[x][1])
+                zhanshi(data[x][0], data[x][1],x)
+
+
+        except Exception as e:
+            print(e)
+            i = str(e)
+            self.signal.emit(str(i))
+            if 'exists' in str(e):
+                sql_del = "DROP VIEW distinct_info"
+                wz.execute(sql_del)  # 删除视图
+
+
+
+
+        self.tableWidget.sortItems(5, Qt.DescendingOrder)#包含Qt.AscendingOrder升序和Qt.DescendingOrder降序这两种方法
+        self.tableWidget.setRowHeight(0, random.randint(55, 65))
+        # for h in range(0, len(data)):
+        #
+        #     self.tableWidget.setRowHeight(h,random.randint(55, 65))
+        #
+        # for w in range(0, 17):
+        #     self.tableWidget.setColumnWidth(w, 100)
+
+
+
+
+
+
+
+
+        i = '查询完成'+'||数据当前周期为'+str(d7).replace("00:00:00", "")+'至'+str(d1).replace("00:00:00", "")+'||'+'●▽●'
+
+
+        self.signal.emit(str(i))
+class Zloutputexcle(QThread): # 建立一个任务线程类
+
+    signal = pyqtSignal(str) #设置触发信号传递的参数数据类型,
+
+    def __init__(self):
+        super(Zloutputexcle,self).__init__()
+
+    def run(self):
+
+        i = '正在导出'
+        self.signal.emit(str(i))
+
+        def sheet1():
+
+            rowc = mengdiancount
+            col = self.tableWidget.columnCount()
+            print(rowc, col)
+
+            titlelist = []
+
+            dict_data = {}
+
+            for i1 in range(0, col):
+                item1 = self.tableWidget.horizontalHeaderItem(i1).text()
+
+                titlelist.append(item1)
+
+            print(titlelist)
+
+            for i2 in range(0, col):
+                datalist = []
+                for i3 in range(0, rowc):
+                    # print(i2, i3)
+                    item2 = self.tableWidget.item(i3, i2).text()
+                    datalist.append(item2)
+
+                dict_data[titlelist[i2]] = datalist
+
+            print(dict_data)
+
+
+            df = pd.DataFrame(dict_data)
+
+            df.to_excel(writer, sheet_name='1')
+
+            workbook1 = writer.book
+            worksheets = writer.sheets
+            worksheet1 = worksheets[u'1']
+
+            fmt1 = workbook1.add_format({"font_name": u"微软雅黑", 'align': 'left'})
+            fmt = workbook1.add_format({"font_name": u"微软雅黑", 'align': 'center'})
+            worksheet1.set_column('D:AA', 9, fmt)  # a到j列 15的宽度 样式为fmt
+            worksheet1.set_column('A:A', 5, fmt)
+            worksheet1.set_column('C:C', 22, fmt)
+            worksheet1.set_column('B:B', 12, fmt)
+
+            # worksheet1.set_row(0, 30)
+
+            '''set_row(row, height)
+            方法，用于设定某一行单元格的行高
+            　　（row：指定行位置，起始下标为0；height：为float类型，设定行高，单位像素）
+            set_column(first_col, last_col, width)
+            方法，用于设置一列或多列单元格的列宽
+            　　（first_col：整型，指定开始列位置，起始下标为0；last_col：整型，指定结束列位置，起始下标为0；width：float类型，设置列宽）
+
+            set_column(“first_col: last_col”, width)方法（first_col和last_col用英文字母表示列名，起始为A）'''
+
+        try:
+
+
+
+
+            writer = pd.ExcelWriter("./ %s 至 %s  竞价总览数据.xlsx" % (
+                zlstarttime, zlendtime))
+
+            sheet1()
+
+            i = '数据表格生成完毕'
+            self.signal.emit(str(i))
+
+            writer.save()
+            writer.close()
+
+
+
+
+        except Exception as e:
+
+            print(e)
+
+            i = str(e)
+
+            self.signal.emit(str(i))
+
+        # i = str(data[x][1])+'查询完成'+'||数据当前周期为'+str(d7)+'至'+str(d1)+'||'+'●▽●'
+        #
+        #
+        # self.signal.emit(str(i))
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    dialog = logindialog1()
+
+    if dialog.exec_()==QDialog.Accepted:
+        the_window = MainWindow1()
+        the_window.show()
+        sys.exit(app.exec_())
